@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Internal working documents — deliberately NOT tracked.
+# GitHub Pages serves every file in the repo, so anything committed here becomes
+# publicly fetchable at <site>/<filename>. PORTFOLIO-BRIEF.md and critique-v10.md
+# contain the claims audit and an internal design critique; publishing those
+# alongside the portfolio would be actively harmful. They remain on disk.
+PORTFOLIO-BRIEF.md
+critique-v10.md
+CLAUDE-CODE-HANDOFF.md
+DESIGN-CONTEXT.md
+
+# local dev tooling
+.claude/
