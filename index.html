@@ -197,7 +197,14 @@ h1 .blue{color:var(--blue-deep)}
 .pill:hover{transform:translateY(-2px)}
 .pill.on{background:var(--ink);color:var(--cream)}
 
+.chartwrap{display:flex;align-items:flex-start;position:relative}
+#chart-axis{flex:0 0 17.5%;width:17.5%;height:auto;display:block;overflow:visible}
+.plotscroll{flex:1 1 auto;min-width:0;overflow-x:auto;overflow-y:hidden}
 svg#chart{width:100%;height:auto;display:block;overflow:visible}
+.chartwrap::after{content:"";position:absolute;top:0;right:0;bottom:0;width:34px;
+  pointer-events:none;opacity:0;transition:opacity .3s;
+  background:linear-gradient(to right,rgba(253,247,242,0),rgba(253,247,242,.96))}
+.chartwrap.more::after{opacity:1}
 .band{stroke:#cdb6ac;stroke-width:1.2;stroke-dasharray:2 7}
 .ylab{font-size:15px;fill:var(--soft);font-family:"Instrument Sans",sans-serif}
 .axt{font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;fill:var(--faint);
@@ -274,8 +281,12 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   .nav{flex-direction:column;align-items:flex-start;gap:12px;padding:14px 18px}
   .navlinks{gap:18px}
   .scrollcue{display:none}
-  #chart{min-width:760px}
-  .chartcard{overflow-x:auto}
+  /* Below the breakpoint the plot is a FIXED width, not 100% of whatever space
+     is left, so the two halves cannot drift apart. 118/168 == 556/792 == 0.702. */
+  #chart-axis{flex:0 0 118px;width:118px}
+  svg#chart{width:556px;min-width:556px;flex:none}
+  .chartcard{padding:var(--pad-small)}
+  .chartcard{overflow-x:visible}
   .fold,.bottom{grid-template-columns:1fr}
   .bento{grid-template-columns:1fr}
   .b-face,.b-pros,.b-blue,.b-res,.b-illo{grid-column:auto}
@@ -331,11 +342,10 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
         </div>
       </div>
 
-<svg id="chart" viewBox="0 0 960 618" role="img" aria-label="Trajectory chart, 2021 to 2027. Two series: paid work and self-directed projects, plotted from user-facing to systems work. Self-directed projects reach market microstructure before employed work does. Leadership and personal interests appear in separate lanes below the axis.">
-  <g><line class="band" x1="168" y1="54" x2="940" y2="54"/><line class="band" x1="168" y1="112" x2="940" y2="112"/>
-     <line class="band" x1="168" y1="170" x2="940" y2="170"/><line class="band" x1="168" y1="228" x2="940" y2="228"/>
-     <line class="band" x1="168" y1="286" x2="940" y2="286"/><line class="band" x1="168" y1="344" x2="940" y2="344"/></g>
-
+<div class="chartwrap">
+<!-- Axis column. Same coordinate space as the plot but outside the scroller, so the
+     vertical reference survives horizontal scrolling. Heights lock the rows together. -->
+<svg id="chart-axis" viewBox="0 0 168 618" aria-hidden="true">
   <text class="axt" x="0" y="26">↑ systems</text>
   <text class="ylab" x="0" y="58">simulation · microstructure</text>
   <text class="ylab" x="0" y="116">systems · security · perf</text>
@@ -344,10 +354,18 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   <text class="ylab" x="0" y="290">full-stack</text>
   <text class="ylab" x="0" y="348">front-end</text>
   <text class="axt" x="0" y="382">↓ user-facing</text>
-
   <text class="lanelab" x="0" y="422">leadership</text>
-  <rect class="lane" x="168" y="430" width="772" height="44" rx="14"/>
   <text class="lanelab" x="0" y="498">the other stuff</text>
+</svg>
+
+<div class="plotscroll">
+<svg id="chart" viewBox="168 0 792 618" role="img" aria-label="Trajectory chart, 2021 to 2027. Two series: paid work and self-directed projects, plotted from user-facing to systems work. Self-directed projects reach market microstructure before employed work does. Leadership and personal interests appear in separate lanes below the axis.">
+  <g><line class="band" x1="168" y1="54" x2="940" y2="54"/><line class="band" x1="168" y1="112" x2="940" y2="112"/>
+     <line class="band" x1="168" y1="170" x2="940" y2="170"/><line class="band" x1="168" y1="228" x2="940" y2="228"/>
+     <line class="band" x1="168" y1="286" x2="940" y2="286"/><line class="band" x1="168" y1="344" x2="940" y2="344"/></g>
+
+
+  <rect class="lane" x="168" y="430" width="772" height="44" rx="14"/>
   <rect class="lane2" x="168" y="506" width="772" height="44" rx="14"/>
 
   <g class="yr" text-anchor="middle">
@@ -425,6 +443,8 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
     <text class="ph" x="824" y="548">···</text><text class="ph" x="876" y="548">···</text>
   </g>
 </svg>
+</div>
+</div>
     </div>
   </div>
 
@@ -720,6 +740,15 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
     a.addEventListener('click',function(e){e.preventDefault();over();apply(k);
       document.getElementById('work').scrollIntoView({behavior:'smooth',block:'start'})});
   });
+
+  var scroller=document.querySelector('.plotscroll'),
+      wrap=document.querySelector('.chartwrap');
+  function edgeCue(){
+    wrap.classList.toggle('more',
+      scroller.scrollWidth-scroller.clientWidth-scroller.scrollLeft>4)}
+  scroller.addEventListener('scroll',edgeCue,{passive:true});
+  addEventListener('resize',edgeCue);
+  addEventListener('load',edgeCue);requestAnimationFrame(edgeCue);edgeCue();
 
   show('p-facevalue',false);                    /* default state, v12 §1 */
   apply('all');
