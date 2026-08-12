@@ -22,7 +22,7 @@
   --plum:#9b7ba6;
   --ink:#1c1917;
   --soft:#6e6260;
-  --faint:#8a7a72;
+  --faint:#7d6d66;   /* 4.61:1 on cream, was 3.87 */
   /* borders: warmed off pure ink, weight carries tier (v12 §5) */
   --stroke:#3a2f2a;
   --stroke-70:rgba(58,47,42,.70);
@@ -116,6 +116,7 @@ a.c-blue,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--cream)}
 .panel:hover{transform:none;box-shadow:none}   /* not a lifting tile, it is a reading surface */
 .panel-head{display:flex;justify-content:space-between;align-items:center;gap:16px;
             margin-bottom:14px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .eyebrow{font-size:var(--t6);letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
 .panel-nav{display:flex;gap:8px;flex-shrink:0}
 .stepper{width:40px;height:40px;border:1.4px solid var(--stroke-70);background:transparent;
@@ -140,13 +141,20 @@ a.c-blue,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--cream)}
           height:56px;max-width:62ch}
 
 /* ---------- selected chart node ---------- */
-.mark[data-id]{pointer-events:auto}
+.mark[data-id]{pointer-events:none}
+.hit{cursor:none}
+.hit:focus-visible{outline:2px solid var(--blue-deep);outline-offset:2px}
 .ph-node{pointer-events:none}
 .mark.sel{stroke-width:3.4}
+/* the selection must outlive a filter, or the only indicator fades during the auto-cycle */
+.series.dim .mark.sel,.series.dim .selring{opacity:1}
+.selring{fill:none;stroke:var(--stroke);stroke-width:1.4;pointer-events:none;
+         transition:opacity .3s}
+.selring[data-off]{opacity:0}
 .mark:focus-visible{outline:2px solid var(--blue-deep);outline-offset:3px}
 
 /* ---------- resume card (v12 §4) ---------- */
-.resume{display:flex;flex-direction:column;justify-content:space-between;min-height:190px;
+.resume{display:flex;flex-direction:column;justify-content:space-between;
         background:var(--card);text-decoration:none;color:inherit}
 .resume .arrow{transition:transform .45s cubic-bezier(.22,1,.36,1)}
 .resume:hover .arrow{transform:translate(3px,-3px)}
@@ -157,6 +165,9 @@ h1{font-family:"Young Serif",serif;font-size:var(--t1);line-height:1.16;margin:0
 h1 .it{font-family:"Instrument Sans",sans-serif;font-style:italic;font-weight:400}
 h1 .blue{color:var(--blue-deep)}
 .hero p{font-size:var(--t3);color:var(--soft);margin:0;max-width:26em}
+/* separators as ::after so none dangles at a wrap */
+.creds{display:flex;flex-wrap:wrap;gap:0 .5em}
+.creds span:not(:last-child)::after{content:" ·";color:var(--faint)}
 
 .portrait{display:flex;align-items:center;justify-content:center;background:var(--cream)}
 .portrait svg{transition:transform .8s cubic-bezier(.22,1,.36,1)}
@@ -189,7 +200,7 @@ h1 .blue{color:var(--blue-deep)}
 svg#chart{width:100%;height:auto;display:block;overflow:visible}
 .band{stroke:#cdb6ac;stroke-width:1.2;stroke-dasharray:2 7}
 .ylab{font-size:15px;fill:var(--soft);font-family:"Instrument Sans",sans-serif}
-.axt{font-size:13px;letter-spacing:.18em;text-transform:uppercase;fill:var(--faint);
+.axt{font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;fill:var(--faint);
      font-family:"Instrument Sans",sans-serif}
 .yr{font-size:15px;fill:var(--faint);font-family:"Instrument Sans",sans-serif}
 .series{transition:opacity .7s cubic-bezier(.22,1,.36,1)}
@@ -211,7 +222,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 .mark:hover{filter:drop-shadow(2px 3px 0 rgba(28,25,23,.35))}
 .lane{fill:#f3e0da;stroke:#e0cec6;stroke-width:1.2}
 .lane2{fill:#eee0ec;stroke:#e3d3e2;stroke-width:1.2}
-.lanelab{font-size:13px;letter-spacing:.18em;text-transform:uppercase;fill:var(--faint);
+.lanelab{font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;fill:var(--faint);
          font-family:"Instrument Sans",sans-serif}
 .ph{font-size:15px;fill:#a98fa0;font-style:italic;font-family:"Instrument Sans",sans-serif}
 
@@ -248,7 +259,8 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 .cursor{position:fixed;top:0;left:0;width:34px;height:34px;pointer-events:none;z-index:99;
         transform:translate(-4px,-4px);transition:transform .25s cubic-bezier(.22,1,.36,1)}
 .cursor.hot{transform:translate(-4px,-4px) scale(1.35) rotate(-8deg)}
-@media (hover:none){html{cursor:auto}.cursor{display:none}}
+@media (hover:none){html,html.cur-ready{cursor:auto}.cursor{display:none}
+  .hit,.pill,.stepper{cursor:pointer}}
 /* base .scrollcue must precede the 900px block, or display:flex re-wins there */
 .scrollcue{display:flex;align-items:center;gap:10px;margin-top:auto;padding-top:20px;font-size:var(--t6);
   letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
@@ -256,7 +268,8 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   animation:drop 2.2s cubic-bezier(.6,0,.4,1) infinite;transform-origin:top}
 @keyframes drop{0%{transform:scaleY(0)}45%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
 
-@media (prefers-reduced-motion:reduce){.mark,.path,.spin,.scrollcue i{animation:none!important;stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.mark,.path,.spin,.scrollcue i,.panel-body{animation:none!important;stroke-dashoffset:0}
+  .card,.stepper,.series{transition:none!important}}
 @media (max-width:900px){
   .nav{flex-direction:column;align-items:flex-start;gap:12px;padding:14px 18px}
   .navlinks{gap:18px}
@@ -299,7 +312,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
         </g>
       </svg>
       <h1>Engineer measuring<br><span class="it blue">market</span> behaviour,<br>then measuring<br>it again</h1>
-      <p>Software&nbsp;engineer · BS&nbsp;Carnegie&nbsp;Mellon · MS&nbsp;Northwestern</p>
+      <p class="creds"><span>Software engineer</span><span>BS Carnegie Mellon</span><span>MS Northwestern</span></p>
     </div>
       <div class="scrollcue"><i></i> more below</div>
     </div>
@@ -416,6 +429,9 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   </div>
 
   <section class="card panel" id="detail" tabindex="0" aria-label="Detail for the selected chart node">
+    <!-- one polite announcement carrying series, dates, title and body together;
+         the visual DOM keeps the eyebrow in the head where it belongs -->
+    <span class="sr-only" id="p-live" aria-live="polite"></span>
     <div class="panel-head">
       <span class="eyebrow" id="p-eyebrow"></span>
       <div class="panel-nav">
@@ -423,13 +439,12 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
         <button class="stepper" id="p-next" aria-label="Next item">→</button>
       </div>
     </div>
-    <div class="panel-body" id="p-swap" aria-live="polite">
+    <div class="panel-body" id="p-swap">
       <div class="panel-img" id="p-img" hidden></div>
       <h3 class="panel-title" id="p-title"></h3>
       <p class="panel-text" id="p-text"></p>
       <div class="panel-ph" id="p-ph" hidden></div>
       <p class="panel-tags" id="p-tags"></p>
-      <a class="panel-link" id="p-link" href="#" hidden>View repo ↗</a>
     </div>
   </section>
 
@@ -440,7 +455,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
         <span class="arrow">↗</span>
       </div>
       <p class="desc-lg">
-        A limit order book simulator built to find out where a market maker's P&amp;L
+        A limit order book simulator built to find out where a market maker’s P&amp;L
         actually comes from, spread capture or inventory risk, and whether the
         simulated answer survives a real market.</p>
       <p class="tags">PYTHON · ORDER BOOK · MONTE CARLO · KALSHI</p>
@@ -608,10 +623,10 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 
   var SER={work:'WORK',proj:'PROJECT',lead:'LEADERSHIP',int:'PERSONAL'};
   var marks=[].slice.call(document.querySelectorAll('.mark[data-id]'));
-  var swap=document.getElementById('p-swap'),cur=null;
+  var swap=document.getElementById('p-swap'),cur=null,lastReal=null;
   var el={eye:document.getElementById('p-eyebrow'),ttl:document.getElementById('p-title'),
           txt:document.getElementById('p-text'),tags:document.getElementById('p-tags'),
-          link:document.getElementById('p-link'),img:document.getElementById('p-img'),
+          img:document.getElementById('p-img'),
           ph:document.getElementById('p-ph')};
 
   /* stepping pool: content-bearing nodes whose series is currently visible */
@@ -626,17 +641,22 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   }
 
   function show(id,scroll){
-    var n=N[id];if(!n)return;cur=id;
+    var n=N[id];if(!n)return;cur=id;if(!n.ph)lastReal=id;
     marks.forEach(function(m){m.classList.toggle('sel',m.dataset.id===id)});
+    [].forEach.call(document.querySelectorAll('.selring'),function(r){
+      if(r.dataset.ring===id)r.removeAttribute('data-off');else r.setAttribute('data-off','')});
     el.eye.textContent=[SER[n.s],n.e,n.d].filter(Boolean).join(' · ');
     el.ttl.textContent=n.t;
     el.txt.textContent=n.b||'';el.txt.hidden=!n.b;
     el.ph.hidden=!n.ph;
     el.img.hidden=!n.img;
     el.tags.textContent=n.g||'';el.tags.hidden=!n.g;
-    el.link.hidden=!n.url;if(n.url)el.link.href=n.url;
+    document.getElementById('p-live').textContent=
+      [el.eye.textContent,n.t,n.b||''].filter(Boolean).join('. ');
     swap.style.animation='none';void swap.offsetWidth;swap.style.animation='';
     syncSteppers();
+    var h=document.querySelector('.hit[data-id="'+id+'"]');
+    if(h&&document.activeElement&&document.activeElement.classList.contains('hit'))h.focus();
     if(scroll){var r=document.getElementById('detail').getBoundingClientRect();
       if(r.top<0||r.bottom>innerHeight)
         document.getElementById('detail').scrollIntoView({block:'nearest',behavior:'smooth'})}
@@ -645,19 +665,48 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
     if(!p.length)return;
     /* current node is outside the pool (a placeholder, or filtered out):
        step back into it rather than trapping the user */
-    if(i<0){show(dir>0?p[0]:p[p.length-1],true);return}
+    if(i<0){
+      /* current node is outside the pool (a placeholder, or filtered out).
+         Resume from the last in-pool node rather than jumping to the start;
+         placeholders carry no date, so "nearest" would always mean earliest. */
+      var j2=p.indexOf(lastReal);
+      if(j2<0){show(dir>0?p[0]:p[p.length-1],true);return}
+      var j3=j2+dir;if(j3<0)j3=0;if(j3>=p.length)j3=p.length-1;
+      show(p[j3],true);return}
     var j=i+dir;if(j<0||j>=p.length)return;show(p[j],true)}
   function syncSteppers(){var p=pool(),i=p.indexOf(cur),off=(i<0&&p.length>0);
     document.getElementById('p-prev').disabled=off?false:(i<=0);
     document.getElementById('p-next').disabled=off?false:(i>=p.length-1)}
 
+  var NS='http://www.w3.org/2000/svg';
   marks.forEach(function(m){
     var n=N[m.dataset.id];if(!n)return;
-    m.setAttribute('role','button');m.setAttribute('tabindex','0');
-    m.setAttribute('aria-label',n.t);
-    m.addEventListener('click',function(){show(m.dataset.id,true)});
-    m.addEventListener('keydown',function(e){
-      if(e.key==='Enter'||e.key===' '){e.preventDefault();show(m.dataset.id,true)}});
+    var b=m.getBBox(),cx=b.x+b.width/2,cy=b.y+b.height/2;
+
+    /* selection ring: sits on the mark, scales with it, survives a filter */
+    var ring=document.createElementNS(NS,'circle');
+    ring.setAttribute('class','selring');ring.setAttribute('cx',cx);
+    ring.setAttribute('cy',cy);ring.setAttribute('r',(Math.max(b.width,b.height)/2)+5);
+    ring.setAttribute('data-ring',m.dataset.id);ring.setAttribute('data-off','');
+    m.parentNode.appendChild(ring);
+
+    /* 28-unit transparent hit area; the visible mark stays r=6.
+       Marks float +/-3.5px forever, so a 8.3px target is never stable. */
+    var hit=document.createElementNS(NS,'circle');
+    hit.setAttribute('cx',cx);hit.setAttribute('cy',cy);hit.setAttribute('r',14);
+    hit.setAttribute('fill','transparent');hit.setAttribute('class','hit');
+    hit.setAttribute('role','button');hit.setAttribute('tabindex','0');
+    hit.setAttribute('aria-label',n.t);hit.dataset.id=m.dataset.id;
+    m.parentNode.appendChild(hit);
+    m.removeAttribute('role');m.removeAttribute('tabindex');m.removeAttribute('aria-label');
+
+    function pick(){show(m.dataset.id,true);hit.focus()}
+    hit.addEventListener('click',pick);
+    hit.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();pick()}
+      /* arrows work from the node too, not only from the panel */
+      if(e.key==='ArrowLeft'){e.preventDefault();step(-1)}
+      if(e.key==='ArrowRight'){e.preventDefault();step(1)}});
   });
   document.getElementById('p-prev').addEventListener('click',function(){step(-1)});
   document.getElementById('p-next').addEventListener('click',function(){step(1)});
@@ -673,8 +722,11 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   });
 
   show('p-facevalue',false);                    /* default state, v12 §1 */
-  apply('all');t=setInterval(function(){i=(i+1)%order.length;apply(order[i])},2400);
-  setTimeout(function(){if(!taken){over();apply('all')}},2400*4);
+  apply('all');
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    t=setInterval(function(){i=(i+1)%order.length;apply(order[i])},2400);
+    setTimeout(function(){if(!taken){over();apply('all')}},2400*4);
+  }
 })();
 </script>
 </body></html>
