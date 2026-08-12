@@ -82,12 +82,13 @@ body{margin:0;background:var(--bg);color:var(--ink);
       position:relative;overflow:hidden;
       transition:transform .6s cubic-bezier(.22,1,.36,1),box-shadow .6s}
 .card:hover{transform:translateY(-4px);box-shadow:6px 8px 0 rgba(28,25,23,.13)}
-/* anchors: the two objects the page is built around */
+/* Tier is carried by padding, radius and border LIGHTNESS. Border *width* was
+   also varied (1.8 / 1.4 / 1.2) but two independent measurements found it renders
+   identically at every DPR, so the widths were removed rather than left misleading. */
 .chartcard,.b-face{padding:var(--pad-anchor);border-radius:var(--rad-anchor);
-                   border-width:1.8px;border-color:var(--stroke)}
-/* small tier: supporting surfaces */
+                   border-color:var(--stroke)}
 .b-illo,.social{padding:var(--pad-small);border-radius:var(--rad-small);
-                border-width:1.2px;border-color:var(--stroke-45)}
+                border-color:var(--stroke-45)}
 
 .c-blush{background:var(--card)} 
 .c-cream{background:var(--cream)}
@@ -203,6 +204,9 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 .lbl{font-size:15.5px;fill:var(--soft);pointer-events:none;font-family:"Instrument Sans",sans-serif;
      paint-order:stroke fill;stroke:var(--halo,var(--cream));stroke-width:2.4px;stroke-linejoin:round}
 .lbl.big{font-size:18px;fill:var(--ink);font-family:"Young Serif",serif}
+/* leader: used only where a label cannot sit near its mark without crossing a path */
+.leader{stroke:var(--faint);stroke-width:1;opacity:.55;pointer-events:none}
+.series.dim .leader{opacity:0}
 #s-lead .lbl{--halo:#f3e0da}
 .path{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
       stroke-dasharray:1500;stroke-dashoffset:1500;animation:draw 2.3s cubic-bezier(.4,0,.2,1) forwards}
@@ -247,7 +251,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   .hit,.pill,.stepper{cursor:pointer}}
 /* base .scrollcue must precede the 900px block, or display:flex re-wins there */
 .scrollcue{display:flex;align-items:center;gap:10px;margin-top:auto;padding-top:20px;font-size:var(--t6);
-  letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+  letter-spacing:.18em;text-transform:uppercase;color:var(--soft)}   /* --faint is 4.25 on --bg */
 .scrollcue i{display:block;width:1.5px;height:26px;background:var(--faint);
   animation:drop 2.2s cubic-bezier(.6,0,.4,1) infinite;transform-origin:top}
 @keyframes drop{0%{transform:scaleY(0)}45%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
@@ -262,6 +266,8 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
      is left, so the two halves cannot drift apart. 118/168 == 556/792 == 0.702. */
   #chart-axis{flex:0 0 118px;width:118px}
   svg#chart{width:556px;min-width:556px;flex:none}
+  /* IMC Prosperity is 101px in a 190px window at 18px; it clipped mid-word */
+  .lbl.big{font-size:15px}
   .chartcard{padding:var(--pad-small)}
   .chartcard{overflow-x:visible}
   .fold,.bottom{grid-template-columns:1fr}
@@ -365,11 +371,11 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
       <circle class="mark" data-id="w-bp"      cx="875" cy="112" r="8.5" style="animation-delay:1.9s,2.8s"/></g>
     <g><text class="lbl" x="205" y="366" text-anchor="middle">re:Bloom</text>
        <text class="lbl" x="178" y="168">CMU Student Affairs</text>
-       <text class="lbl" x="345" y="150" text-anchor="middle">DSW</text>
+       <text class="lbl" x="345" y="140" text-anchor="middle">DSW</text>
        <text class="lbl" x="465" y="310" text-anchor="middle">UPMC · QA</text>
        <text class="lbl" x="530" y="214" text-anchor="end">UPMC · backend</text>
        <text class="lbl" x="640" y="250" text-anchor="middle">Zelis</text>
-       <text class="lbl" x="790" y="244" text-anchor="end">NU research</text>
+       <text class="lbl" x="820" y="186">NU research</text>
        <text class="lbl big" x="885" y="96" text-anchor="middle">BluePrint</text></g>
   </g>
 
@@ -386,13 +392,14 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
       <rect class="mark" data-id="p-imc"      x="827" y="77" width="15" height="15" rx="3" style="animation-delay:1.9s,2.6s"/>
       <rect class="mark" data-id="p-facevalue" x="860" y="45" width="19" height="19" rx="3.5" style="animation-delay:2.1s,3s"/></g>
     <g><text class="lbl" x="266" y="290">Rand.eat</text>
+       <line class="leader" x1="334" y1="248" x2="334" y2="312"/>
        <text class="lbl" x="334" y="330" text-anchor="middle">Healthcare app</text>
-       <text class="lbl" x="366" y="152">ML rideshare</text>
+       <text class="lbl" x="380" y="150">ML rideshare</text>
        <text class="lbl" x="380" y="306" text-anchor="middle">Travlr</text>
        <text class="lbl" x="722" y="160">ML recs</text>
        <text class="lbl" x="801" y="270" text-anchor="middle">Music platform</text>
        <text class="lbl big" x="683" y="80">IMC Prosperity</text>
-       <text class="lbl big" x="732" y="36">Face Value</text></g>
+       <text class="lbl big" x="869" y="30" text-anchor="middle">Face Value</text></g>
   </g>
 
   <g class="series" id="s-lead">
