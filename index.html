@@ -71,13 +71,11 @@ body{margin:0;background:var(--bg);color:var(--ink);
 /* ---------- grid ---------- */
 .fold{display:grid;grid-template-columns:.62fr 1.38fr;gap:var(--gap-in);align-items:stretch}
 .left-stack{display:flex;flex-direction:column;gap:var(--gap-in)}
-.left-stack .hero{flex:1;display:flex;flex-direction:column}
+/* anchor the credentials to the bottom edge so the empty half reads as margin */
+.left-stack .hero{flex:1;display:flex;flex-direction:column;justify-content:space-between}
 .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--gap-in);margin-top:var(--gap-group)}
-.b-face{grid-column:span 4;min-height:220px}
-.b-pros{grid-column:span 3}
-.b-blue{grid-column:span 3}
-.b-res{grid-column:span 6}
-.b-illo{grid-column:span 2;display:flex;align-items:center;justify-content:center}
+.b-face{grid-column:span 6;min-height:220px}
+.b-illo{display:flex;align-items:center;justify-content:center}
 
 /* base card = mid tier: 1.4px at 70% */
 .card{border:1.4px solid var(--stroke-70);border-radius:var(--rad-mid);padding:var(--pad-mid);
@@ -91,24 +89,22 @@ body{margin:0;background:var(--bg);color:var(--ink);
 .b-illo,.social{padding:var(--pad-small);border-radius:var(--rad-small);
                 border-width:1.2px;border-color:var(--stroke-45)}
 
-.c-blush{background:var(--card)} .c-rose{background:var(--card-2)}
-.c-lilac{background:var(--card-3)} .c-cream{background:var(--cream)}
+.c-blush{background:var(--card)} 
+.c-cream{background:var(--cream)}
 /* the one genuine mid-value surface, breaks the pale-wash band */
 .c-blue{background:var(--blue-card)}
 /* a.c-blue outranks .card-link's color:inherit; without it the title stays ink on dark */
-a.c-blue,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--cream)}
+a.c-blue,.c-blue .t-mid,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--cream)}
 
 /* ---------- bento content classes (were inline) ---------- */
 .card-link{text-decoration:none;color:inherit}
 .t-row{display:flex;justify-content:space-between;align-items:flex-start}
 .t-anchor{font-family:"Young Serif",serif;font-size:var(--t2)}
 .t-mid{font-family:"Young Serif",serif;font-size:var(--t2)}
-.t-sm{font-family:"Young Serif",serif;font-size:var(--t3)}
 .arrow{font-size:var(--t3)}
 .desc{font-size:var(--t4);color:var(--soft);margin:8px 0 0}
 .desc-lg{font-size:var(--t3);color:var(--soft);margin:10px 0 0;max-width:24em}
 .tags{font-size:var(--t5);color:var(--soft);margin:14px 0 0;letter-spacing:.06em}
-.ph-label{font-size:var(--t6);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
 .illo-svg{width:100%;max-width:250px;height:auto}
 
 /* ---------- detail panel (v12 §1) ---------- */
@@ -116,6 +112,10 @@ a.c-blue,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--cream)}
 .panel:hover{transform:none;box-shadow:none}   /* not a lifting tile, it is a reading surface */
 .panel-head{display:flex;justify-content:space-between;align-items:center;gap:16px;
             margin-bottom:14px}
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--cream);
+      color:var(--ink);padding:12px 18px;border:1.4px solid var(--stroke);
+      border-radius:var(--rad-small);font-size:var(--t5)}
+.skip:focus{left:12px;top:12px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .eyebrow{font-size:var(--t6);letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
 .panel-nav{display:flex;gap:8px;flex-shrink:0}
@@ -130,9 +130,6 @@ a.c-blue,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--cream)}
 .panel-title{font-family:"Young Serif",serif;font-size:var(--t2);font-weight:400;margin:0 0 10px}
 .panel-text{font-size:var(--t4);color:var(--soft);margin:0;max-width:62ch}
 .panel-tags{font-size:var(--t5);color:var(--soft);margin:14px 0 0;letter-spacing:.06em}
-.panel-link{display:inline-block;margin-top:14px;font-size:var(--t5);letter-spacing:.06em;
-            text-transform:uppercase;color:var(--ink);text-decoration:none;
-            border-bottom:1.4px solid var(--stroke-70);padding-bottom:2px}
 /* leadership image slot, unused until photographs are supplied */
 .panel-img{border:1.2px dashed var(--stroke-45);border-radius:var(--rad-small);
            aspect-ratio:16/7;margin:0 0 14px;max-width:340px}
@@ -143,7 +140,8 @@ a.c-blue,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--cream)}
 /* ---------- selected chart node ---------- */
 .mark[data-id]{pointer-events:none}
 .hit{cursor:none}
-.hit:focus-visible{outline:2px solid var(--blue-deep);outline-offset:2px}
+.hit:focus-visible{outline:2px solid var(--blue-deep);outline-offset:2px;
+                   stroke:var(--blue-deep);stroke-width:2}
 .ph-node{pointer-events:none}
 .mark.sel{stroke-width:3.4}
 /* the selection must outlive a filter, or the only indicator fades during the auto-cycle */
@@ -155,7 +153,7 @@ a.c-blue,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--cream)}
 
 /* ---------- resume card (v12 §4) ---------- */
 .resume{display:flex;flex-direction:column;justify-content:space-between;
-        background:var(--card);text-decoration:none;color:inherit}
+        text-decoration:none;color:inherit}
 .resume .arrow{transition:transform .45s cubic-bezier(.22,1,.36,1)}
 .resume:hover .arrow{transform:translate(3px,-3px)}
 .resume .t-mid{font-family:"Young Serif",serif;font-size:var(--t2)}
@@ -169,19 +167,8 @@ h1 .blue{color:var(--blue-deep)}
 .creds{display:flex;flex-wrap:wrap;gap:0 .5em}
 .creds span:not(:last-child)::after{content:" ·";color:var(--faint)}
 
-.portrait{display:flex;align-items:center;justify-content:center;background:var(--cream)}
-.portrait svg{transition:transform .8s cubic-bezier(.22,1,.36,1)}
-.portrait:hover svg{transform:translateY(-5px) rotate(-1deg)}
 
 
-.proj{background:var(--card);border:1.6px solid var(--stroke);border-radius:22px;padding:18px 20px;
-      transition:background .45s,transform .45s cubic-bezier(.22,1,.36,1)}
-.proj:hover{background:var(--card-2);transform:translateX(4px)}
-.proj .t{display:flex;justify-content:space-between;align-items:center;
-         font-family:"Young Serif",serif;font-size:var(--t3)}
-.proj .arrow{transition:transform .45s cubic-bezier(.22,1,.36,1)}
-.proj:hover .arrow{transform:translate(3px,-3px)}
-.proj .m{font-size:var(--t5);color:var(--soft);margin-top:3px}
 
 /* ---------- chart tile ---------- */
 .chartcard{background:var(--cream);display:flex;flex-direction:column}
@@ -214,7 +201,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 .series.dim{opacity:.1}
 .series.dim .lbl,.series.dim .ph{opacity:0}
 .lbl{font-size:15.5px;fill:var(--soft);pointer-events:none;font-family:"Instrument Sans",sans-serif;
-     paint-order:stroke fill;stroke:var(--halo,var(--cream));stroke-width:3.4px;stroke-linejoin:round}
+     paint-order:stroke fill;stroke:var(--halo,var(--cream));stroke-width:2.4px;stroke-linejoin:round}
 .lbl.big{font-size:18px;fill:var(--ink);font-family:"Young Serif",serif}
 #s-lead .lbl{--halo:#f3e0da}
 .path{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
@@ -233,19 +220,9 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
          font-family:"Instrument Sans",sans-serif}
 .ph{font-size:15px;fill:#a98fa0;font-style:italic;font-family:"Instrument Sans",sans-serif}
 
-/* ---------- findings ---------- */
-.find .n{font-family:"Young Serif",serif;font-size:var(--t1);line-height:1;display:block;margin-bottom:8px}
-.find p{margin:0;font-size:var(--t4);color:var(--soft)}
-.find:nth-child(1) .n{color:var(--terra)}
-.find:nth-child(2) .n{color:var(--blue-deep)}
-.find:nth-child(3) .n{color:var(--plum)}
 
 /* ---------- bottom ---------- */
-.bottom{display:grid;grid-template-columns:1fr 1.1fr .9fr;gap:var(--gap-in);margin-top:var(--gap-sect)}
-/* placeholder: dashed, no fill; status is enforced here, not by memory */
-.about{display:flex;align-items:center;justify-content:center;min-height:190px;
-       background:transparent;border-style:dashed}
-.about p{margin:0;font-size:var(--t4);color:var(--soft)}
+.bottom{display:grid;grid-template-columns:1fr 1.15fr .8fr .95fr;gap:var(--gap-in);margin-top:var(--gap-sect)}
 .contact{background:var(--card-2);display:flex;flex-direction:column;justify-content:flex-start;
          min-height:190px}
 .contact .arrow{display:inline-block;font-size:var(--t2);transition:transform .45s cubic-bezier(.22,1,.36,1)}
@@ -300,6 +277,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
         fill="#1c1917" stroke="#1c1917" stroke-width="1.4" stroke-linejoin="round"/>
 </svg>
 
+<a class="skip" href="#detail">Skip the chart, go to the detail panel</a>
 <div class="shell">
 
   <nav class="nav">
@@ -385,14 +363,14 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
       <circle class="mark" data-id="w-zelis"   cx="640" cy="222" r="6" style="animation-delay:1.5s,2s"/>
       <circle class="mark" data-id="w-nu"      cx="810" cy="164" r="6" style="animation-delay:1.7s,2.4s"/>
       <circle class="mark" data-id="w-bp"      cx="875" cy="112" r="8.5" style="animation-delay:1.9s,2.8s"/></g>
-    <g><text class="lbl" x="205" y="326" text-anchor="middle">re:Bloom</text>
-       <text class="lbl" x="242" y="210">CMU Student Affairs</text>
-       <text class="lbl" x="332" y="162" text-anchor="end">DSW</text>
+    <g><text class="lbl" x="205" y="366" text-anchor="middle">re:Bloom</text>
+       <text class="lbl" x="178" y="168">CMU Student Affairs</text>
+       <text class="lbl" x="345" y="150" text-anchor="middle">DSW</text>
        <text class="lbl" x="465" y="310" text-anchor="middle">UPMC · QA</text>
        <text class="lbl" x="530" y="214" text-anchor="end">UPMC · backend</text>
-       <text class="lbl" x="644" y="212">Zelis</text>
-       <text class="lbl" x="778" y="154">NU research</text>
-       <text class="lbl big" x="886" y="106">BluePrint</text></g>
+       <text class="lbl" x="640" y="250" text-anchor="middle">Zelis</text>
+       <text class="lbl" x="790" y="244" text-anchor="end">NU research</text>
+       <text class="lbl big" x="885" y="96" text-anchor="middle">BluePrint</text></g>
   </g>
 
   <g class="series" id="s-proj">
@@ -408,11 +386,11 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
       <rect class="mark" data-id="p-imc"      x="827" y="77" width="15" height="15" rx="3" style="animation-delay:1.9s,2.6s"/>
       <rect class="mark" data-id="p-facevalue" x="860" y="45" width="19" height="19" rx="3.5" style="animation-delay:2.1s,3s"/></g>
     <g><text class="lbl" x="266" y="290">Rand.eat</text>
-       <text class="lbl" x="306" y="258">Healthcare app</text>
+       <text class="lbl" x="334" y="330" text-anchor="middle">Healthcare app</text>
        <text class="lbl" x="366" y="152">ML rideshare</text>
-       <text class="lbl" x="372" y="306">Travlr</text>
+       <text class="lbl" x="380" y="306" text-anchor="middle">Travlr</text>
        <text class="lbl" x="722" y="160">ML recs</text>
-       <text class="lbl" x="738" y="242">Music platform</text>
+       <text class="lbl" x="801" y="270" text-anchor="middle">Music platform</text>
        <text class="lbl big" x="683" y="80">IMC Prosperity</text>
        <text class="lbl big" x="732" y="36">Face Value</text></g>
   </g>
@@ -481,6 +459,31 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
       <p class="tags">PYTHON · ORDER BOOK · MONTE CARLO · KALSHI</p>
     </a>
 
+
+    
+
+  </div>
+
+  <!-- bottom -->
+  <div class="bottom" id="contact">
+    <!-- href stays "#" until the PDF exists -->
+    <a class="card resume c-blue card-link" href="#">
+      <div class="t-row">
+        <span class="t-mid">Resume</span>
+        <span class="arrow">↗</span>
+      </div>
+    </a>
+    <a class="card contact card-link" href="mailto:varshaa0801@gmail.com">
+      <div>
+        <div class="q">Have some questions?</div>
+        <div class="big">Get in touch <span class="arrow">↗</span></div>
+      </div>
+    </a>
+    <div class="card c-blush social">
+      <a href="https://github.com/varshaasj">GitHub</a>
+      <a href="#">LinkedIn</a>
+      <a href="mailto:varshaa0801@gmail.com">Email</a>
+    </div>
     <div class="card c-cream b-illo">
       <svg viewBox="0 0 260 240" aria-hidden="true" class="illo-svg">
         <g fill="none" stroke="#6e6260" stroke-width="1.8" opacity=".62" stroke-linecap="round" stroke-linejoin="round">
@@ -516,31 +519,6 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
           <path d="M90 142 c3 3 7 3 10 0" stroke-width="2"/>
         </g>
       </svg>
-    </div>
-
-    
-
-  </div>
-
-  <!-- bottom -->
-  <div class="bottom" id="contact">
-    <!-- href stays "#" until the PDF exists -->
-    <a class="card resume card-link" href="#">
-      <div class="t-row">
-        <span class="t-mid">Resume</span>
-        <span class="arrow">↗</span>
-      </div>
-    </a>
-    <a class="card contact card-link" href="mailto:varshaa0801@gmail.com">
-      <div>
-        <div class="q">Have some questions?</div>
-        <div class="big">Get in touch <span class="arrow">↗</span></div>
-      </div>
-    </a>
-    <div class="card c-blush social">
-      <a href="https://github.com/varshaasj">GitHub</a>
-      <a href="#">LinkedIn</a>
-      <a href="mailto:varshaa0801@gmail.com">Email</a>
     </div>
   </div>
 </div>
@@ -750,7 +728,10 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   addEventListener('resize',edgeCue);
   addEventListener('load',edgeCue);requestAnimationFrame(edgeCue);edgeCue();
 
-  show('p-facevalue',false);                    /* default state, v12 §1 */
+  /* Default was Face Value, which is last in the chronology, so the forward stepper
+     opened disabled and its opening sentence duplicated the tile. BluePrint is
+     current work and chronologically adjacent, so both directions stay live. */
+  show('w-bp',false);
   apply('all');
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     t=setInterval(function(){i=(i+1)%order.length;apply(order[i])},2400);
