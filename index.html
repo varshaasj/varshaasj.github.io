@@ -303,7 +303,8 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ---------- cursor ---------- */
-.cursor{position:fixed;top:0;left:0;width:34px;height:34px;pointer-events:none;z-index:99;
+.cursor-wrap{position:fixed;top:0;left:0;pointer-events:none;z-index:99;will-change:transform}
+.cursor{position:static;width:34px;height:34px;pointer-events:none;
         transform:translate(-4px,-4px);transition:transform .25s cubic-bezier(.22,1,.36,1)}
 .cursor.hot{transform:translate(-4px,-4px) scale(1.35) rotate(-8deg)}
 @media (hover:none){html,html.cur-ready{cursor:auto}.cursor{display:none}
@@ -315,6 +316,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   animation:drop 2.2s cubic-bezier(.6,0,.4,1) infinite;transform-origin:top}
 @keyframes drop{0%{transform:scaleY(0)}45%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
 
+body.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.mark,.path,.spin,.scrollcue i,.panel-body{animation:none!important;stroke-dashoffset:0}
   .mark,.mw{transition:none!important}
   .card,.stepper,.series{transition:none!important}}
@@ -570,9 +572,17 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 (function(){
   var c=document.getElementById('cursor'),tx=0,ty=0,cx=0,cy=0;
   document.documentElement.classList.add('cur-ready');
-  document.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY});
-  (function l(){cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;
-    c.style.left=cx+'px';c.style.top=cy+'px';requestAnimationFrame(l)})();
+  document.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;wake()},{passive:true});
+  /* left/top forced a layout on every frame. A transform on a wrapper is composited,
+     and keeps .cursor free to carry its own hot-state transform and transition. */
+  var cwrap=document.createElement('div');cwrap.className='cursor-wrap';
+  c.parentNode.insertBefore(cwrap,c);cwrap.appendChild(c);
+  var raf=null;
+  function l(){cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;
+    cwrap.style.transform='translate3d('+cx+'px,'+cy+'px,0)';
+    /* stop once it has caught up, rather than burning a frame forever */
+    if(Math.abs(tx-cx)>.1||Math.abs(ty-cy)>.1)raf=requestAnimationFrame(l);else raf=null}
+  function wake(){if(raf===null)raf=requestAnimationFrame(l)}
   /* delegated: .hit areas and .pcard list cards are created after this runs,
      so a static querySelectorAll would miss both */
   document.addEventListener('mouseover',function(e){
@@ -892,6 +902,16 @@ var DETAIL={
     if(h)  {var el=document.getElementById(h);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
   }
   addEventListener('hashchange',route);route();
+
+  /* 21 SVG marks, a 40s doodle spin and the scroll cue all animate forever. Pause
+     them whenever the chart is off screen, which is most of the time on a page this
+     tall, and while a routed view is open. */
+  var chartCard=document.querySelector('.chartcard');
+  if(window.IntersectionObserver){
+    new IntersectionObserver(function(es){
+      document.body.classList.toggle('chart-off',!es[0].isIntersecting);
+    },{rootMargin:'120px'}).observe(chartCard);
+  }
 
   var scroller=document.querySelector('.plotscroll'),
       wrap=document.querySelector('.chartwrap');
