@@ -58,7 +58,9 @@ body{margin:0;background:var(--bg);color:var(--ink);
 .nav{background:var(--card);border:1.6px solid var(--stroke);border-radius:20px;
      padding:16px 26px;display:flex;align-items:center;justify-content:space-between;
      margin-bottom:var(--gap-group)}
-.brand{font-family:"Young Serif",serif;font-size:var(--t2);letter-spacing:-.01em}
+.brand{font-family:"Young Serif",serif;font-size:var(--t2);letter-spacing:-.01em;
+       text-decoration:none;color:inherit;transition:opacity .25s}
+.brand:hover{opacity:.62}
 .brand em{font-style:normal;font-family:"Instrument Sans",sans-serif;font-weight:400;
           color:var(--soft);font-size:var(--t3)}
 .navlinks{display:flex;gap:26px;font-size:var(--t5);letter-spacing:.14em;text-transform:uppercase}
@@ -138,6 +140,7 @@ a.c-blue,.c-blue .t-mid,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--c
 .detail-hero .detail-dates{font-family:"Instrument Sans",sans-serif;font-size:var(--t5);
                            letter-spacing:.12em;text-transform:uppercase;margin-top:10px}
 .backlink-dark{color:#c9b9b2;border-bottom-color:rgba(253,247,242,.35)}
+.detail-home{margin-left:18px}
 .backlink-dark:hover{color:var(--cream);border-bottom-color:var(--cream)}
 .detail-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .detail-tags span{font-family:"Instrument Sans",sans-serif;font-size:var(--t6);letter-spacing:.14em;
@@ -345,7 +348,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 <div class="shell">
 
   <nav class="nav">
-    <div class="brand">VARSHAA <em>Sekar Jayanthi</em></div>
+    <a class="brand" href="#" aria-label="Home">VARSHAA <em>Sekar Jayanthi</em></a>
     <div class="navlinks">
       <a href="#work">Work</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
     </div>
@@ -584,6 +587,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   <article id="view-detail" class="view">
     <div class="detail-hero">
       <a class="backlink backlink-dark" id="detail-back" href="#work">Back</a>
+      <a class="backlink backlink-dark detail-home" href="#">Home</a>
       <h2 id="detail-title"></h2>
       <p id="detail-sub"></p>
       <p class="detail-dates" id="detail-dates"></p>
