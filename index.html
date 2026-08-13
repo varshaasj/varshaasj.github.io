@@ -316,7 +316,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   animation:drop 2.2s cubic-bezier(.6,0,.4,1) infinite;transform-origin:top}
 @keyframes drop{0%{transform:scaleY(0)}45%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
 
-body.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{animation-play-state:paused}
+body.settled.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.mark,.path,.spin,.scrollcue i,.panel-body{animation:none!important;stroke-dashoffset:0}
   .mark,.mw{transition:none!important}
   .card,.stepper,.series{transition:none!important}}
@@ -907,6 +907,9 @@ var DETAIL={
      them whenever the chart is off screen, which is most of the time on a page this
      tall, and while a routed view is open. */
   var chartCard=document.querySelector('.chartcard');
+  /* the entry animations run up to ~4s and pop uses backwards fill, so pausing before
+     they finish freezes every mark at scale(0). Only pause after they have settled. */
+  setTimeout(function(){document.body.classList.add('settled')},4500);
   if(window.IntersectionObserver){
     new IntersectionObserver(function(es){
       document.body.classList.toggle('chart-off',!es[0].isIntersecting);
