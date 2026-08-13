@@ -79,7 +79,6 @@ body{margin:0;background:var(--bg);color:var(--ink);
 .left-stack .hero{flex:1;display:flex;flex-direction:column;justify-content:flex-start}
 .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--gap-in);margin-top:var(--gap-group)}
 .b-face{grid-column:span 6;min-height:220px}
-.b-illo{display:flex;align-items:center;justify-content:center}
 
 /* base card = mid tier: 1.4px at 70% */
 .card{border:1.4px solid var(--stroke-70);border-radius:var(--rad-mid);padding:var(--pad-mid);
@@ -91,8 +90,8 @@ body{margin:0;background:var(--bg);color:var(--ink);
    identically at every DPR, so the widths were removed rather than left misleading. */
 .chartcard,.b-face{padding:var(--pad-anchor);border-radius:var(--rad-anchor);
                    border-color:var(--stroke)}
-.b-illo,.social{padding:var(--pad-small);border-radius:var(--rad-small);
-                border-color:var(--stroke-45)}
+.social{padding:var(--pad-small);border-radius:var(--rad-small);
+        border-color:var(--stroke-45)}
 
 .c-blush{background:var(--card)} 
 .c-cream{background:var(--cream)}
@@ -109,7 +108,6 @@ a.c-blue,.c-blue .t-mid,.c-blue .arrow{color:var(--cream)}
 .arrow{font-size:var(--t3)}
 .desc-lg{font-size:var(--t3);color:var(--soft);margin:10px 0 0;max-width:24em}
 .tags{font-size:var(--t5);color:var(--soft);margin:14px 0 0;letter-spacing:.06em}
-.illo-svg{width:100%;max-width:250px;height:auto}
 
 /* ---------- routed views ---------- */
 .view{display:none}
@@ -286,7 +284,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 
 
 /* ---------- bottom ---------- */
-.bottom{display:grid;grid-template-columns:1fr 1.15fr .8fr .95fr;gap:var(--gap-in);margin-top:var(--gap-sect)}
+.bottom{display:grid;grid-template-columns:1fr 1.15fr .8fr;gap:var(--gap-in);margin-top:var(--gap-sect)}
 .contact{background:var(--card-2);display:flex;flex-direction:column;justify-content:flex-start;
          min-height:190px}
 .contact .arrow{display:inline-block;font-size:var(--t2);transition:transform .45s cubic-bezier(.22,1,.36,1)}
@@ -334,7 +332,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   .chartcard{overflow-x:visible}
   .fold,.bottom{grid-template-columns:1fr}
   .bento{grid-template-columns:1fr}
-  .b-face,.b-illo{grid-column:auto}
+  .b-face{grid-column:auto}
   h1{font-size:29px}
 }
 </style></head>
@@ -358,7 +356,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   <div id="view-home" class="view on">
   <div class="fold">
     <div class="left-stack">
-      <div class="card c-blush hero">
+      <div class="card c-cream hero">
       <svg class="doodle spin" aria-hidden="true" style="top:-26px;right:-26px;width:150px;height:150px" viewBox="0 0 100 100">
         <g stroke="#c97b5f" stroke-width=".7" fill="none" opacity=".85">
           <circle cx="50" cy="50" r="34"/><circle cx="50" cy="50" r="27"/>
@@ -537,42 +535,6 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
       <a href="https://github.com/varshaasj">GitHub</a>
       <a href="#">LinkedIn</a>
       <a href="mailto:varshaa0801@gmail.com">Email</a>
-    </div>
-    <div class="card c-cream b-illo">
-      <svg viewBox="0 0 260 240" aria-hidden="true" class="illo-svg">
-        <g fill="none" stroke="#6e6260" stroke-width="1.8" opacity=".62" stroke-linecap="round" stroke-linejoin="round">
-          <!-- plant -->
-          <path d="M28 196 h26 l-3 26 h-20 z" fill="#c97b5f"/>
-          <path d="M41 196 c0-16 -10-24 -16-27 c2 10 6 20 16 27z" fill="#e9dbe8"/>
-          <path d="M41 196 c0-20 9-28 17-31 c-3 12 -7 22 -17 31z" fill="#e9dbe8"/>
-          <path d="M41 196 v-34"/>
-          <!-- desk -->
-          <path d="M12 222 h236"/>
-          <!-- laptop base + screen -->
-          <path d="M96 214 h96 l10 8 h-116 z" fill="#f6d0c8"/>
-          <path d="M104 214 v-52 a4 4 0 0 1 4-4 h72 a4 4 0 0 1 4 4 v52" fill="#7d9ab8"/>
-          <path d="M112 168 h44 M112 180 h56 M112 192 h34" stroke="#fdf7f2" stroke-width="2.4"/>
-          <!-- coffee -->
-          <path d="M214 200 h30 v18 a8 8 0 0 1 -8 8 h-14 a8 8 0 0 1 -8 -8 z" fill="#fdf7f2"/>
-          <path d="M244 205 h6 a6 6 0 0 1 0 12 h-6"/>
-          <path d="M222 190 c4-5 -4-9 0-14 M232 190 c4-5 -4-9 0-14" stroke-width="1.8" opacity=".7"/>
-          <!-- figure: body -->
-          <path d="M56 222 c0-40 14-58 34-58 h18 c20 0 32 18 32 58" fill="#fbe3dc"/>
-          <!-- arm to laptop -->
-          <path d="M126 186 c14 2 26 8 32 16" />
-          <!-- head -->
-          <circle cx="92" cy="130" r="26" fill="#f6d0c8"/>
-          <!-- hair -->
-          <path d="M66 130 c0-20 12-32 26-32 c16 0 26 12 26 30 c0 6 -2 10 -4 12
-                   c1-14 -6-22 -14-24 c-10-2 -18 4 -22 10 c-3 5 -4 12 -4 18
-                   c-4-4 -8-8 -8-14z" fill="#1c1917" stroke="none"/>
-          <path d="M118 128 c8 10 8 30 2 44" stroke-width="2" fill="none"/>
-          <path d="M66 132 c-6 12 -4 30 2 42" stroke-width="2" fill="none"/>
-          <!-- face -->
-          <path d="M84 128 h7 M99 128 h7" stroke-width="2.4"/>
-          <path d="M90 142 c3 3 7 3 10 0" stroke-width="2"/>
-        </g>
-      </svg>
     </div>
   </div>
   </div><!-- /view-home -->
