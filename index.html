@@ -193,7 +193,9 @@ a.c-blue,.c-blue .t-mid,.c-blue .arrow{color:var(--cream)}
           height:56px;max-width:62ch}
 
 /* ---------- selected chart node ---------- */
-.mark[data-id]{pointer-events:none}
+/* marks are display only. Only nodes with a data-id get a .hit, so a mark without
+   one is visible but not hoverable or clickable. */
+.mark{pointer-events:none}
 .hit{cursor:none}
 .hit:focus-visible{outline:2px solid var(--blue-deep);outline-offset:2px;
                    stroke:var(--blue-deep);stroke-width:2}
@@ -459,10 +461,10 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   <g class="series" id="s-lead">
     <line x1="300" y1="452" x2="880" y2="452" stroke="var(--plum)" stroke-width="1.6" opacity=".5"/>
     <g fill="var(--plum)">
-      <circle class="mark" data-id="lead-advisor" cx="300" cy="452" r="6" style="animation-delay:.8s,.3s"/>
+      <circle class="mark" cx="300" cy="452" r="6" style="animation-delay:.8s,.3s"/>
       <circle class="mark" data-id="lead-lead" cx="400" cy="452" r="6" style="animation-delay:1s,.9s"/>
       <circle class="mark" data-id="lead-ab" cx="470" cy="452" r="6" style="animation-delay:1.2s,1.5s"/>
-      <circle class="mark" data-id="lead-mentor" cx="880" cy="452" r="6" style="animation-delay:1.4s,2.1s"/></g>
+      <circle class="mark" cx="880" cy="452" r="6" style="animation-delay:1.4s,2.1s"/></g>
     <text class="lbl" x="300" y="438" text-anchor="middle">JFC advisor</text>
     <text class="lbl" x="400" y="472" text-anchor="middle">lead advisor</text>
     <text class="lbl" x="470" y="438" text-anchor="middle">Activities Board VP</text>
@@ -685,10 +687,6 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
     b:'A limit order book simulator built to find out where a market maker’s P&L actually comes from, spread capture or inventory risk, and whether the simulated answer survives a real market. 85% of a naive market maker’s loss turns out to be spread P&L, not inventory. Inventory skew recovers only 38% of that loss and shows no mean improvement across 50 seeds, but cuts variance roughly threefold. Against six days of recorded Kalshi data, 320,469 rows through 165 real contract resolutions, spreads widen 21× on information arrival, and mid-price analysis reports 38× more arbitrage than is actually executable.',
     g:'PYTHON · ORDER BOOK · MONTE CARLO · KALSHI'},
 
-  'lead-advisor':{s:'lead',d:'2021–22',k:202108,t:'JFC Financial Advisor',
-    e:'CMU Student Government'},
-  'lead-mentor':{s:'lead',d:'Jul 2026–present',k:202607,t:'Tech mentor',
-    e:'BluePrint'},
   'lead-lead':{s:'lead',d:'2022–23',k:202208,t:'JFC Lead Financial Advisor',
     e:'CMU Student Government',
     b:'Promoted to lead after two years as an advisor; trained and managed three advisors. Three budget cycles on a committee allocating roughly $2M annually across 250 organisations.'},
