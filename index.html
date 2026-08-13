@@ -71,7 +71,10 @@ body{margin:0;background:var(--bg);color:var(--ink);
 .fold{display:grid;grid-template-columns:.62fr 1.38fr;gap:var(--gap-in);align-items:stretch}
 .left-stack{display:flex;flex-direction:column;gap:var(--gap-in)}
 /* anchor the credentials to the bottom edge so the empty half reads as margin */
-.left-stack .hero{flex:1;display:flex;flex-direction:column;justify-content:space-between}
+/* Two critiques disagreed here. v10 wanted the text top-aligned inside a full-height
+   card; v12 wanted space-between. Top-aligned reads better: space-between stranded the
+   byline at the bottom of a 600px card, far from the h1 it belongs to. */
+.left-stack .hero{flex:1;display:flex;flex-direction:column;justify-content:flex-start}
 .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--gap-in);margin-top:var(--gap-group)}
 .b-face{grid-column:span 6;min-height:220px}
 .b-illo{display:flex;align-items:center;justify-content:center}
@@ -164,7 +167,8 @@ h1 .it{font-family:"Instrument Sans",sans-serif;font-style:italic;font-weight:40
 h1 .blue{color:var(--blue-deep)}
 .hero p{font-size:var(--t3);color:var(--soft);margin:0;max-width:26em}
 /* separators as ::after so none dangles at a wrap */
-.creds{display:flex;flex-wrap:wrap;gap:0 .5em}
+/* .hero p is (0,0,1,1) and outranks a bare .creds, so qualify it */
+.hero p.creds{display:flex;flex-wrap:wrap;gap:0 .5em;font-size:var(--t2);margin-top:20px}
 .creds span:not(:last-child)::after{content:" ·";color:var(--faint)}
 
 
@@ -232,7 +236,8 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 .contact:hover .arrow{transform:translate(4px,-4px)}
 .contact .q{font-size:var(--t5);color:var(--soft)}
 .contact .big{font-family:"Young Serif",serif;font-size:var(--t1);line-height:1.05}
-.social{display:flex;align-items:center;justify-content:space-around;font-size:var(--t5);
+.social{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+        gap:16px;font-size:var(--t5);
         letter-spacing:.14em;text-transform:uppercase}
 .social a{color:var(--ink);text-decoration:none}
 .social a:hover{color:var(--blue-deep)}
@@ -305,7 +310,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
           <ellipse cx="50" cy="50" rx="34" ry="13" transform="rotate(150 50 50)"/>
         </g>
       </svg>
-      <h1>Engineer measuring<br><span class="it blue">market</span> behaviour,<br>then measuring<br>it again</h1>
+      <h1>Everything<br>I’ve built,<br>from front-end<br>to <span class="it blue">order books</span></h1>
       <p class="creds"><span>Software engineer</span><span>BS Carnegie Mellon</span><span>MS Northwestern</span></p>
     </div>
       <div class="scrollcue"><i></i> more below</div>
