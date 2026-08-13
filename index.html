@@ -110,6 +110,52 @@ a.c-blue,.c-blue .t-mid,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--c
 .tags{font-size:var(--t5);color:var(--soft);margin:14px 0 0;letter-spacing:.06em}
 .illo-svg{width:100%;max-width:250px;height:auto}
 
+/* ---------- routed views ---------- */
+.view{display:none}
+.view.on{display:block}
+.backlink{font-family:"Instrument Sans",sans-serif;font-size:var(--t5);letter-spacing:.12em;
+          text-transform:uppercase;color:var(--soft);text-decoration:none;
+          border-bottom:1px solid var(--stroke-45);padding-bottom:2px}
+.backlink:hover{color:var(--ink);border-bottom-color:var(--stroke)}
+.list-head{padding:var(--gap-group) 0 0}
+.list-title{font-family:"Young Serif",serif;font-size:var(--t1);font-weight:400;margin:20px 0 6px}
+.list-count{font-size:var(--t4);color:var(--soft);margin:0 0 var(--gap-group)}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap-in);margin-top:var(--gap-in)}
+.pcard{display:block;background:var(--card);border:1.4px solid var(--stroke-70);
+       border-radius:var(--rad-mid);padding:var(--pad-mid);text-decoration:none;color:inherit;
+       transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s}
+.pcard:hover{transform:translateY(-3px);box-shadow:5px 7px 0 rgba(28,25,23,.13)}
+.pcard h3{font-family:"Young Serif",serif;font-size:var(--t2);font-weight:400;margin:0 0 6px}
+.pcard .sub{font-size:var(--t4);color:var(--soft);margin:0 0 12px}
+.pcard .meta{font-family:"Instrument Sans",sans-serif;font-size:var(--t5);color:var(--soft);
+             letter-spacing:.06em}
+.pcard .meta b{font-weight:400;color:var(--ink)}
+/* detail */
+.detail-hero{background:#2b2320;color:var(--cream);border-radius:var(--rad-anchor);
+             padding:var(--pad-anchor);margin-top:var(--gap-group)}
+.detail-hero h2{font-family:"Young Serif",serif;font-size:var(--t1);font-weight:400;margin:20px 0 8px}
+.detail-hero p{margin:0;color:#c9b9b2;font-size:var(--t3)}
+.detail-hero .detail-dates{font-family:"Instrument Sans",sans-serif;font-size:var(--t5);
+                           letter-spacing:.12em;text-transform:uppercase;margin-top:10px}
+.backlink-dark{color:#c9b9b2;border-bottom-color:rgba(253,247,242,.35)}
+.backlink-dark:hover{color:var(--cream);border-bottom-color:var(--cream)}
+.detail-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.detail-tags span{font-family:"Instrument Sans",sans-serif;font-size:var(--t6);letter-spacing:.14em;
+                  border:1px solid rgba(253,247,242,.45);border-radius:4px;padding:5px 9px}
+/* body copy aligns with the hero's inner text, not the hero's outer edge */
+.detail-body{padding:var(--gap-group) var(--pad-anchor) 0}
+.detail-body p{font-size:var(--t3);line-height:1.75;color:var(--ink);margin:0 0 1.15em;max-width:68ch}
+.detail-nav{display:flex;justify-content:space-between;gap:20px;
+            margin:var(--gap-sect) var(--pad-anchor) 0;
+            border-top:1px solid var(--stroke-45);padding:20px 0 var(--gap-sect)}
+.list-head,.filters{padding-left:2px}
+@media (max-width:900px){
+  .cards{grid-template-columns:1fr}
+  .detail-hero{padding:var(--pad-mid)}
+  .detail-body,.detail-nav{padding-left:0;padding-right:0}
+  .detail-nav{margin-left:0;margin-right:0}
+}
+
 /* ---------- detail panel (v12 §1) ---------- */
 .panel{background:var(--cream);margin-top:var(--gap-in);scroll-margin-top:20px}
 .panel:hover{transform:none;box-shadow:none}   /* not a lifting tile, it is a reading surface */
@@ -133,6 +179,10 @@ a.c-blue,.c-blue .t-mid,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--c
 .panel-title{font-family:"Young Serif",serif;font-size:var(--t2);font-weight:400;margin:0 0 10px}
 .panel-text{font-size:var(--t4);color:var(--soft);margin:0;max-width:62ch}
 .panel-tags{font-size:var(--t5);color:var(--soft);margin:14px 0 0;letter-spacing:.06em}
+.panel-link{display:inline-block;margin-top:16px;font-family:"Instrument Sans",sans-serif;
+            font-size:var(--t5);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
+            text-decoration:none;border-bottom:1.4px solid var(--stroke-70);padding-bottom:2px}
+.panel-link:hover{border-bottom-color:var(--stroke)}
 /* leadership image slot, unused until photographs are supplied */
 .panel-img{border:1.2px dashed var(--stroke-45);border-radius:var(--rad-small);
            aspect-ratio:16/7;margin:0 0 14px;max-width:340px}
@@ -290,10 +340,11 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   <nav class="nav">
     <div class="brand">VARSHAA <em>Sekar Jayanthi</em></div>
     <div class="navlinks">
-      <a href="#work" data-filter="work">Work</a><a href="#work" data-filter="proj">Projects</a><a href="#contact">Contact</a>
+      <a href="#work">Work</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
     </div>
   </nav>
 
+  <div id="view-home" class="view on">
   <div class="fold">
     <div class="left-stack">
       <div class="card c-blush hero">
@@ -437,6 +488,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
       <p class="panel-text" id="p-text"></p>
       <div class="panel-ph" id="p-ph" hidden></div>
       <p class="panel-tags" id="p-tags"></p>
+      <a class="panel-link" id="p-more" href="#" hidden>Read the full entry ↗</a>
     </div>
   </section>
 
@@ -515,6 +567,32 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
       </svg>
     </div>
   </div>
+  </div><!-- /view-home -->
+
+  <section id="view-list" class="view" aria-live="polite">
+    <div class="list-head">
+      <a class="backlink" href="#">Back to the chart</a>
+      <h2 class="list-title" id="list-title"></h2>
+      <p class="list-count" id="list-count"></p>
+    </div>
+    <div class="filters" id="list-filters"></div>
+    <div class="cards" id="list-cards"></div>
+  </section>
+
+  <article id="view-detail" class="view">
+    <div class="detail-hero">
+      <a class="backlink backlink-dark" id="detail-back" href="#work">Back</a>
+      <h2 id="detail-title"></h2>
+      <p id="detail-sub"></p>
+      <p class="detail-dates" id="detail-dates"></p>
+      <div class="detail-tags" id="detail-tags"></div>
+    </div>
+    <div class="detail-body" id="detail-body"></div>
+    <nav class="detail-nav">
+      <a class="backlink" id="detail-prev" href="#"></a>
+      <a class="backlink" id="detail-next" href="#"></a>
+    </nav>
+  </article>
 </div>
 
 <script>
@@ -643,6 +721,13 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
     el.ph.hidden=!n.ph;
     el.img.hidden=!n.img;
     el.tags.textContent=n.g||'';el.tags.hidden=!n.g;
+    /* chart node ids match DETAIL ids, except the two UPMC rotations which the
+       work page presents as a single year */
+    var did=(id==='w-upmcqa'||id==='w-upmcbe')?'w-upmc':id;
+    var more=document.getElementById('p-more');
+    if(typeof DETAIL!=='undefined'&&DETAIL[did]){
+      more.href='#'+(DETAIL[did].s==='work'?'work':'projects')+'/'+did;more.hidden=false}
+    else more.hidden=true;
     document.getElementById('p-live').textContent=
       [el.eye.textContent,n.t,n.b||''].filter(Boolean).join('. ');
     swap.style.animation='none';void swap.offsetWidth;swap.style.animation='';
@@ -712,6 +797,120 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
     a.addEventListener('click',function(e){e.preventDefault();over();apply(k);
       document.getElementById('work').scrollIntoView({behavior:'smooth',block:'start'})});
   });
+
+var DETAIL={
+  'w-build412':{s:'work',t:'Build412 Tech',e:'Strategy & Operations Intern',d:'May–Aug 2021',k:202105,g:'HUBSPOT · CRM · SALES ANALYSIS',
+    L:['Implemented and automated a HubSpot CRM, ran sales pattern analysis and supported growth decisions. From the second month this covered the Pittsburgh Robotics Network as well, which the same founder was standing up in parallel.','Also led delivery of a membership management system through an external agency.']},
+  'w-rebloom':{s:'work',t:'re:Bloom',e:'UX / Web Development Intern',d:'Jul–Sep 2021',k:202107,g:'FIGMA · WORDPRESS · USER RESEARCH',
+    L:['An agency engagement for the client Orange Vista, covering the whole loop rather than a slice of it.','Ran user research with ten client stakeholders to define what the interface needed to do and what success would look like, built three high-fidelity Figma prototypes, and shipped the chosen direction as five new pages with SEO instrumentation.']},
+  'w-cmuit':{s:'work',t:'CMU Student Affairs IT',e:'Software Developer Intern',d:'Aug 2021–Feb 2022',k:202108,g:'C# · MS SQL SERVER',
+    L:['The housing department received student requests by email and routed them by hand. Built a full-stack distribution list management application that did it instead, in C# and MS SQL Server, over 50,000+ student contact records, with authorization across four pages.','Also proposed a replacement architecture for the department’s existing system.']},
+  'w-dsw':{s:'work',t:'Designer Brands (DSW)',e:'BI / Data Analyst Intern',d:'May–Aug 2022',k:202205,g:'POWERBI · PYTHON · MICROSTRATEGY',
+    L:['DSW runs more than 500 overnight data integration jobs, and a quiet failure surfaces the next morning as a wrong report. Built a PowerBI playbook that tracked those jobs, analysed failure patterns and predicted which were likely to fail. It went into production use.','Also wrote a Python script forecasting brand performance by store geography, which fed decisions about which brands DSW would sign, and around ten MicroStrategy reports with predictive components, including return rates and sales potential.']},
+  'w-cmuta':{s:'work',t:'Carnegie Mellon University',e:'Teaching Assistant, 67-272 Application Design and Development',d:'Jan–Aug 2023',k:202301,g:'RUBY ON RAILS · DOCKER · REST APIS',
+    L:['Eighty-plus students, weekly labs, full-stack development in Ruby on Rails with Docker, REST APIs and unit testing.']},
+  'w-upmc':{s:'work',t:'UPMC Corporate Services',e:'Software Engineer',d:'Jul 2023–Jun 2024',k:202307,g:'C# / .NET · MS SQL SERVER · CYPRESS · PLAYWRIGHT',
+    L:['A year on a Health Plan web application, split between building it and making it trustworthy.','The build half was around twenty features in C#/.NET against MS SQL Server: new API endpoints, integrations with other UPMC systems, and a body of stored procedures, schema changes and migrations. Owned the lower-environment database. Narrowed and paginated endpoints that were over-fetching, measuring response time and payload before and after.','The other half was tests and visibility. Fifty-plus Cypress and Playwright tests feeding release gating took production error rates down 47%.','The application ran in ten environments and Azure DevOps could not show test detail across them, so a failure cost about twenty minutes just to identify. Built a full-stack view tracking every ticket’s state in testing, linked to its feature, the developer who built it, and exactly which environments it passed and failed in. The view was used at executive level.']},
+  'w-zelis':{s:'work',t:'Computer Enterprises Inc.',e:'Software Developer, Consultant. Client: Zelis Healthcare',d:'Jun 2024–Aug 2025',k:202406,g:'C# / .NET · REACT · SQL',
+    L:['Fourteen months embedded with the client’s engineering team as the vendor-side owner, on a healthcare payments platform: the systems that decide what a claim costs and who pays it. Six major features in C#/.NET and React.','Database performance work: joins were structured for how someone thought about the problem rather than how the planner executes it, indexes were missing on predicates that had become hot, and SELECT statements pulled columns nobody read. Rewriting those took performance up 40%.','Also built an LLM pipeline into the data-migration workflow: 10+ migrations, 98% accuracy against manual verification, and a 20% cut in cycle time. The pipeline was designed to fail loudly rather than plausibly.']},
+  'w-nu':{s:'work',t:'Northwestern University',e:'Graduate Researcher, MSIT 499 Agentic Systems Evaluation',d:'Jan–Jun 2026',k:202601,g:'PYTHON · LLM EVALUATION · KUBERNETES',
+    L:['A multi-agent system that diagnoses and repairs broken Kubernetes and Docker configurations. The research question was whether a verifier-grounded memory layer, storing facts with typed validity conditions rather than as loose text, actually improves an agent’s ability to finish a task.','Ran the ablation that answers it: the same 155 tasks through three pipeline configurations, 400+ evaluation runs on GPT-5.5, with and without the memory layer. Accuracy went from 54% to 78.5%.','Co-built the repair loop, which came out of the measurement. Reading failures at iteration granularity, the dominant failure mode was the environment never reaching a valid pre-state, so the agent was asked to fix something that had not finished initialising. One task failed twenty consecutive times for that reason alone. The loop gives ten bounded attempts to establish preconditions before a task counts as failed.','Four task tables disagreed with each other, 273, 400 and 462 rows against 534 directories on disk, and were reconciled before compute went into a run that would have been invalid. Tasks with an explain contract were also being routed to an evaluator that could only handle a debug contract, which raised on every one.','Contributor on a paper in preparation.']},
+  'w-tenacitics':{s:'work',t:'Tenacitics, Inc.',e:'AI Engineer Intern',d:'Jun 2026–present',k:202606,g:'FULL-STACK · SQL · ACCESS CONTROL',
+    L:['An internal platform for what happens between a developer writing a SQL script and a database administrator running it. Previously a ticket, an email, an attachment and a wait.','Developers submit a script against one or more environments, Dev, QA, UAT or Prod, with a ticket number and execution notes. The file goes to external storage rather than the application server. The DBA reviews it, then runs it against the chosen environment from inside the app. Status moves through a three-state lifecycle and can be reverted, and both sides get email at every transition.','Access control spans three roles with different surfaces, not only different permissions: a developer sees the request form and only their own history, a DBA sees the execution queue and never the submission form.']},
+  'w-bp':{s:'work',t:'BluePrint',e:'Software Engineer',d:'Jul 2026–present',k:202607,g:'TYPESCRIPT · POSTGRESQL · REACT',
+    L:['A platform that runs a software project through its lifecycle using eight coordinated agents, gated by a phase-transition agent that decides whether work may move forward. It is built using itself.','Work spans four tracks: a prototype-generation agent, the project knowledge graph, authentication and onboarding, and an in-product help agent. 24 pull requests merged to main in 34 days across four sprints, against a protocol capping at three per day.','The knowledge graph stores a project’s decisions, risks, requirements, stories, meetings and artefacts as nodes, so you can ask what a decision was based on and what it put at risk. The query that walks that graph took 31 seconds and spilled to disk. The specification specified a recursive CTE using UNION ALL, which re-emits every path to every node, so a graph with fan-in convergence produces combinatorially more rows than it has nodes: 472,421 intermediate rows for a result of 123. Switching to UNION on (id, depth) lets Postgres collapse the convergence in the engine rather than materialising every path and deduplicating afterwards. 183ms, with output proven set-identical before and after.','Found three live security defects, all while building unrelated features. In Express a router.use(middleware) with no path argument runs before the router has matched a route, so req.params is empty and the tenant-membership check was reading an undefined project ID. On one router that failed closed and took down phase handoffs platform-wide; on another it failed open and returned one client’s data to another with a 200. Same root cause, opposite symptoms. The test helper used to fake a tenant tripped the middleware’s own early return, so the suite was structurally incapable of seeing it. Swept 22 routers, held the pull request unmerged for four days rather than ship onto the vulnerable surface, and wrote it up so it could be reproduced in fifteen lines.']},
+  'p-sciencequiz':{s:'proj',t:'sciencequiz',e:'Multi-Phase Rails Build',d:'Spring 2021',k:202101,g:'RUBY ON RAILS',
+    L:['A quiz application built across four sequential phases, each with its own scope and deadline.']},
+  'p-mayan':{s:'proj',t:'Mayan-EDMS',e:'Open Source Contribution',d:'Fall 2021',k:202109,g:'DJANGO · PYTHON',
+    L:['Contributing to Mayan-EDMS, a production Django document management system, as part of 17-313. Team of five.','Work involved locating where a change belongs inside a large existing codebase.']},
+  'p-dronuts':{s:'proj',t:'Dronuts',e:'Drone Delivery Platform',d:'Jan–Mar 2022',k:202201,g:'REACT · TYPESCRIPT · PUPPETEER',
+    L:['A drone-based delivery application with a customer ordering flow and an employee dashboard for open orders, drone assignment and order cancellation. Team of six.','Wrote the end-to-end suite in Puppeteer, covering the full ordering flow. Also ran the requirements and user-story phase and shared frontend work.']},
+  'p-health':{s:'proj',t:'Healthcare Data Application',e:'Barcode Scanner',d:'Jan–May 2022',k:202202,g:'RUBY ON RAILS · POSTGRESQL · HEROKU',
+    L:['A full-stack barcode scanner system built and deployed for a local non-profit hospital, automating patient data recording for 200+ patients, with authorization rules over who could see what. It replaced a manual process.']},
+  'p-rideshare':{s:'proj',t:'ML Price Prediction',e:'Rideshare Analysis',d:'Jan–May 2022',k:202203,g:'PYTHON · PYSPARK · SPARKML',
+    L:['Two models on Kaggle rideshare data predicting Uber versus Lyft pricing to identify the cheaper option for a given trip, with exploratory analysis of how price and weather features interact.','The distributed-compute piece was the new part: where Spark earns its overhead and where it does not.']},
+  'p-randeat':{s:'proj',t:'Rand.eat',e:'Restaurant Discovery App',d:'Mar–May 2022',k:202204,g:'REACT · NODE · MONGODB',
+    L:['A web app that randomises lunch and dinner choices to break decision fatigue and generates reservation requests. Team of four, three sprints from proposal to deployed v1.0.','Built the frontend, page structure and client-side routing, and owned the project plan and timeline.']},
+  'p-travlr':{s:'proj',t:'Travlr',e:'iOS Application',d:'Aug–Dec 2022',k:202208,g:'SWIFT',
+    L:['A full-stack travel itinerary application across five screens at 94% test coverage, reducing planning time by around 20% in testing.','The high coverage was deliberate, to find out what that discipline costs to maintain on a real codebase rather than assert it.']},
+  'p-pui':{s:'proj',t:'Programming Usable Interfaces',e:'Five Deployed Interfaces',d:'Spring 2023',k:202302,g:'HTML · CSS · JAVASCRIPT',
+    L:['Five interface projects built and deployed to GitHub Pages, plus a final project with a demo video. HCI coursework on the gap between an interface that works and one a person can use without being told how.']},
+  'p-mlrecs':{s:'proj',t:'ML Movie Recommendation Engine',e:'',d:'Jan–Apr 2026',k:202601,g:'PYTHON · NUMPY',
+    L:['A recommender over 45,000+ TMDB entries with regression, regularisation and a Perceptron classifier, implemented from first principles without ML libraries. 90%+ accuracy.','Writing the gradient updates directly is the difference between knowing what regularisation does and knowing why.']},
+  'p-music':{s:'proj',t:'Scalable Music Analytics Platform',e:'',d:'Jan 2026–present',k:202602,g:'REACT · FASTAPI · AWS',
+    L:['A serverless application over the Spotify API that analyses an artist’s catalogue as a timeline rather than a list: career momentum, catalogue depth, and the gaps between releases and what they suggest about an artist’s eras.','Eight-plus REST endpoints on a FastAPI backend, with token and album-level caching, because paginated discographies otherwise burn through API quota on the first interesting question. Live, with active users.']},
+  'p-imc':{s:'proj',t:'IMC Prosperity 4',e:'Algorithmic Trading Competition',d:'Apr–May 2026',k:202604,g:'PYTHON',
+    L:['A global algorithmic trading competition, 18,803 teams, five rounds. Finished #1275 overall with 432,706 XIRECs against a 200,000 qualifying threshold, reaching the fifth and final round. Team of two.','In round two the market maker for the highest-volume product quoted around a hardcoded fair value of 10,000. Replacing that constant with a rolling mean over a fifteen-tick window, quoting ±6, doubled that product’s daily profit from about 7k to 15.8k. The fair value is not a constant.','The cross-product work covered fifty products across ten groups, running PCA to find common factor structure and testing a hundred candidate pairs for relationships worth trading.','Round one was a linear-regression signal with slope-based position sizing, which beat a moving-average baseline by 35%. Round three lost about 10,000: a trader that touched only two products, on badly chosen thresholds, written under time pressure.','Fifteen-plus trader versions across the competition, with every backtest compared to the live result. The backtester said 275,717 for round two and reality said around 324,000.']},
+  'p-facevalue':{s:'proj',t:'Face Value',e:'Market Microstructure Simulator',d:'Jul–Aug 2026',k:202607,g:'PYTHON · ORDER BOOK · MONTE CARLO · KALSHI',
+    L:['A market-making simulator built to answer one question: when a market maker loses money, where does it actually go? Solo. C++ port in progress.','The core is a limit order book with price-time priority and full matching semantics: partial fills, multi-level walking, cancellation. Price levels live in a sorted dict for O(log n) insert and ordered iteration, each level is a deque for O(1) FIFO, and a hash map from order ID to order makes cancellation O(1). Prices are integers, and a maker’s resting price sets the fill price. A public trade tape and per-agent fill queues model the fact that participants see the market through execution reports, not the book’s internals.','On top sits a discrete-event engine, a heap of timestamped callbacks with self-scheduling agents and Poisson arrivals via exponential gaps, written to be domain-agnostic, plus a Monte Carlo harness with paired designs across seeds, confidence intervals and parameter sweeps. Reproducibility comes from spawning independent generator streams from one seed, so the world’s path stays invariant when the agent mix changes.','The P&L decomposition splits profit into spread capture, inventory risk and terminal exposure, and asserts agreement with an independently computed total to 1e-12. Both accounting assertions caught real bugs the first time they ran.','What the simulation says. Adverse selection costs about 4.8¢ per fill going from 0% to 40% informed flow, across thirty seeds per cell. About 85% of a naive market maker’s loss is spread P&L rather than inventory. Inventory skewing moves inventory P&L from −184 to +201 but recovers only 38% of the loss and shows no mean improvement across fifty seeds; what it does is cut variance roughly threefold.','What the live data says. A recorder pulls seven Kalshi series every thirty seconds, writing only on change, which cut storage about 90%: 320,469 rows across 478 contracts over six days, through 165 real contract resolutions. Spreads widen 21× on information arrival, median 1¢ quiet to 21¢, monotonically across six buckets. Approaching resolution, market makers withdraw rather than widen, one-sided quotes going from 65% to 95%+ within eight hours. Across nested contract ladders 4.91% of adjacent pairs look like they violate monotonicity in mid-price, but only 0.13% are executable.','Two things that went wrong. A reference-price confound had inverted the sign of a measured effect, diagnosed by measuring mean absolute distance from fair value at 8.18¢ against 2.17¢. And a twelve-fold improvement on one seed proved indistinguishable from baseline across fifty. Every headline number is computed two independent ways.','Scope: not deployed, no users, no live trading, no real money. Six days of market data, not months. Stage 6 partial. No C++ performance numbers.']}
+};
+
+  var SERIES={work:{label:'Work',hash:'work'},proj:{label:'Projects',hash:'projects'}};
+  function idsFor(k){return Object.keys(DETAIL).filter(function(i){return DETAIL[i].s===k})
+    .sort(function(a,b){return DETAIL[b].k-DETAIL[a].k});}   /* most recent first */
+  function tagsOf(id){return (DETAIL[id].g||'').split('·').map(function(t){return t.trim()}).filter(Boolean);}
+  function yearOf(id){return String(DETAIL[id].k).slice(0,4);}
+
+  var listFilter='All';
+  function renderList(k){
+    var ids=idsFor(k), sec=SERIES[k];
+    document.getElementById('list-title').textContent=sec.label;
+    document.getElementById('list-count').textContent=ids.length+' entries, most recent first';
+    var tags={};ids.forEach(function(i){tagsOf(i).forEach(function(t){tags[t]=(tags[t]||0)+1})});
+    var order=['All'].concat(Object.keys(tags).sort(function(a,b){return tags[b]-tags[a]}).slice(0,7));
+    if(order.indexOf(listFilter)<0)listFilter='All';
+    var fw=document.getElementById('list-filters');fw.innerHTML='';
+    order.forEach(function(t){
+      var b=document.createElement('button');b.className='pill'+(t===listFilter?' on':'');
+      b.textContent=t.toLowerCase();
+      b.addEventListener('click',function(){listFilter=t;renderList(k)});
+      fw.appendChild(b);});
+    var wrap=document.getElementById('list-cards');wrap.innerHTML='';
+    ids.filter(function(i){return listFilter==='All'||tagsOf(i).indexOf(listFilter)>=0})
+      .forEach(function(i){
+        var d=DETAIL[i],a=document.createElement('a');
+        a.className='pcard';a.href='#'+sec.hash+'/'+i;
+        var h=document.createElement('h3');h.textContent=d.t;a.appendChild(h);
+        if(d.e){var p=document.createElement('p');p.className='sub';p.textContent=d.e;a.appendChild(p);}
+        var m=document.createElement('p');m.className='meta';
+        m.innerHTML='<b>'+d.d+'</b>'+(d.g?'  ·  '+d.g.toLowerCase():'');
+        a.appendChild(m);wrap.appendChild(a);});
+  }
+
+  function renderDetail(k,id){
+    var d=DETAIL[id];if(!d)return false;
+    var sec=SERIES[k],ids=idsFor(k),i=ids.indexOf(id);
+    document.getElementById('detail-title').textContent=d.t;
+    var sub=document.getElementById('detail-sub');sub.textContent=d.e||'';sub.hidden=!d.e;
+    document.getElementById('detail-dates').textContent=d.d;
+    document.getElementById('detail-back').href='#'+sec.hash;
+    document.getElementById('detail-back').textContent='All '+sec.label.toLowerCase();
+    var tg=document.getElementById('detail-tags');tg.innerHTML='';
+    tagsOf(id).forEach(function(t){var s2=document.createElement('span');s2.textContent=t;tg.appendChild(s2)});
+    var body=document.getElementById('detail-body');body.innerHTML='';
+    (d.L||[]).forEach(function(par){var p=document.createElement('p');p.textContent=par;body.appendChild(p)});
+    var prev=document.getElementById('detail-prev'),next=document.getElementById('detail-next');
+    if(i>0){prev.href='#'+sec.hash+'/'+ids[i-1];prev.textContent='← '+DETAIL[ids[i-1]].t;prev.hidden=false}
+    else prev.hidden=true;
+    if(i<ids.length-1){next.href='#'+sec.hash+'/'+ids[i+1];next.textContent=DETAIL[ids[i+1]].t+' →';next.hidden=false}
+    else next.hidden=true;
+    return true;
+  }
+
+  /* named showView, not show: the panel already declares a show() in this scope and
+     function declarations hoist, so the later one would win for both call sites */
+  function showView(view){['view-home','view-list','view-detail'].forEach(function(v){
+    document.getElementById(v).classList.toggle('on',v===view)});}
+
+  function route(){
+    var h=(location.hash||'').replace(/^#/,''),parts=h.split('/');
+    var key=parts[0]==='projects'?'proj':parts[0]==='work'?'work':null;
+    if(key&&parts[1]&&renderDetail(key,parts[1])){showView('view-detail');scrollTo(0,0);return}
+    if(key){renderList(key);showView('view-list');scrollTo(0,0);return}
+    showView('view-home');
+    if(h)  {var el=document.getElementById(h);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
+  }
+  addEventListener('hashchange',route);route();
 
   var scroller=document.querySelector('.plotscroll'),
       wrap=document.querySelector('.chartwrap');
