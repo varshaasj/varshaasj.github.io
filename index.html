@@ -145,7 +145,6 @@ a.c-blue,.c-blue .t-mid,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--c
 .hit{cursor:none}
 .hit:focus-visible{outline:2px solid var(--blue-deep);outline-offset:2px;
                    stroke:var(--blue-deep);stroke-width:2}
-.ph-node{pointer-events:none}
 .mark.sel{stroke-width:3.4}
 /* the selection must outlive a filter, or the only indicator fades during the auto-cycle */
 .series.dim .mark.sel,.series.dim .selring{opacity:1}
@@ -203,8 +202,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 .yr{font-size:15px;fill:var(--faint);font-family:"Instrument Sans",sans-serif}
 .series{transition:opacity .7s cubic-bezier(.22,1,.36,1)}
 .series.dim{opacity:.1}
-.series.dim .lbl,.series.dim .ph{opacity:0}
-.lbl{font-size:15.5px;fill:var(--soft);pointer-events:none;font-family:"Instrument Sans",sans-serif;
+.series.dim .lbl,.series.dim .lbl{font-size:15.5px;fill:var(--soft);pointer-events:none;font-family:"Instrument Sans",sans-serif;
      paint-order:stroke fill;stroke:var(--halo,var(--cream));stroke-width:2.4px;stroke-linejoin:round}
 .lbl.big{font-size:18px;fill:var(--ink);font-family:"Young Serif",serif}
 /* leader: used only where a label cannot sit near its mark without crossing a path */
@@ -222,7 +220,6 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-3.5px)}}
 .mark:hover{filter:drop-shadow(2px 3px 0 rgba(28,25,23,.35))}
 .lane{fill:#f3e0da;stroke:#e0cec6;stroke-width:1.2}
-.lane2{fill:#eee0ec;stroke:#e3d3e2;stroke-width:1.2}
 .lanelab{font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;fill:var(--faint);
          font-family:"Instrument Sans",sans-serif}
 .ph{font-size:15px;fill:#a98fa0;font-style:italic;font-family:"Instrument Sans",sans-serif}
@@ -333,7 +330,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 <div class="chartwrap">
 <!-- Axis column. Same coordinate space as the plot but outside the scroller, so the
      vertical reference survives horizontal scrolling. Heights lock the rows together. -->
-<svg id="chart-axis" viewBox="0 0 168 618" aria-hidden="true">
+<svg id="chart-axis" viewBox="0 0 168 546" aria-hidden="true">
   <text class="axt" x="0" y="26">↑ systems</text>
   <text class="ylab" x="0" y="58">simulation · microstructure</text>
   <text class="ylab" x="0" y="116">systems · security · perf</text>
@@ -343,23 +340,21 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   <text class="ylab" x="0" y="348">front-end</text>
   <text class="axt" x="0" y="382">↓ user-facing</text>
   <text class="lanelab" x="0" y="422">leadership</text>
-  <text class="lanelab" x="0" y="498">the other stuff</text>
 </svg>
 
 <div class="plotscroll">
-<svg id="chart" viewBox="168 0 792 618" role="img" aria-label="Trajectory chart, 2021 to 2027. Two series: paid work and self-directed projects, plotted from user-facing to systems work. Self-directed projects reach market microstructure before employed work does. Leadership and personal interests appear in separate lanes below the axis.">
+<svg id="chart" viewBox="168 0 792 546" role="img" aria-label="Trajectory chart, 2021 to 2027. Two series: paid work and self-directed projects, plotted from user-facing to systems work. Self-directed projects reach market microstructure before employed work does. Leadership and personal interests appear in separate lanes below the axis.">
   <g><line class="band" x1="168" y1="54" x2="940" y2="54"/><line class="band" x1="168" y1="112" x2="940" y2="112"/>
      <line class="band" x1="168" y1="170" x2="940" y2="170"/><line class="band" x1="168" y1="228" x2="940" y2="228"/>
      <line class="band" x1="168" y1="286" x2="940" y2="286"/><line class="band" x1="168" y1="344" x2="940" y2="344"/></g>
 
 
   <rect class="lane" x="168" y="430" width="772" height="44" rx="14"/>
-  <rect class="lane2" x="168" y="506" width="772" height="44" rx="14"/>
 
   <g class="yr" text-anchor="middle">
-    <text x="200" y="582">2021</text><text x="325" y="582">2022</text><text x="450" y="582">2023</text>
-    <text x="575" y="582">2024</text><text x="700" y="582">2025</text><text x="825" y="582">2026</text>
-    <text x="925" y="582">2027</text></g>
+    <text x="200" y="510">2021</text><text x="325" y="510">2022</text><text x="450" y="510">2023</text>
+    <text x="575" y="510">2024</text><text x="700" y="510">2025</text><text x="825" y="510">2026</text>
+    <text x="925" y="510">2027</text></g>
 
   <g class="series" id="s-work">
     <path class="path" style="stroke:var(--ink);animation-delay:.1s"
@@ -417,20 +412,6 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
     <text class="lbl" x="478" y="472">Activities Board VP</text>
   </g>
 
-  <g class="series" id="s-int">
-    <g fill="#c9a2bd">
-      <circle class="mark" data-id="int-bands" cx="215" cy="528" r="5" style="animation-delay:1s,.1s"/>
-      <circle class="mark ph-node" cx="330" cy="528" r="5" style="animation-delay:1.15s,.7s"/>
-      <circle class="mark ph-node" cx="455" cy="528" r="5" style="animation-delay:1.3s,1.3s"/>
-      <circle class="mark ph-node" cx="600" cy="528" r="5" style="animation-delay:1.45s,1.9s"/>
-      <circle class="mark ph-node" cx="735" cy="528" r="5" style="animation-delay:1.6s,2.5s"/>
-      <circle class="mark ph-node" cx="838" cy="528" r="5" style="animation-delay:1.75s,3.1s"/>
-      <circle class="mark ph-node" cx="890" cy="528" r="5" style="animation-delay:1.9s,3.7s"/></g>
-    <text class="ph" x="184" y="548">the four bands</text>
-    <text class="ph" x="316" y="548">···</text><text class="ph" x="441" y="548">···</text>
-    <text class="ph" x="586" y="548">···</text><text class="ph" x="721" y="548">···</text>
-    <text class="ph" x="824" y="548">···</text><text class="ph" x="876" y="548">···</text>
-  </g>
 </svg>
 </div>
 </div>
@@ -626,11 +607,9 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
     t:'Activities Board VP / Internal Development Chair',
     e:'CMU Student Government',img:1},
 
-  /* content not supplied; renders as a placeholder block, never invented copy */
-  'int-bands':{s:'int',d:'',k:0,t:'The four bands',ph:1}
   };
 
-  var SER={work:'WORK',proj:'PROJECT',lead:'LEADERSHIP',int:'PERSONAL'};
+  var SER={work:'WORK',proj:'PROJECT',lead:'LEADERSHIP'};
   var marks=[].slice.call(document.querySelectorAll('.mark[data-id]'));
   var swap=document.getElementById('p-swap'),cur=null,lastReal=null;
   var el={eye:document.getElementById('p-eyebrow'),ttl:document.getElementById('p-title'),
