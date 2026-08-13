@@ -268,7 +268,13 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
       transition:filter .3s}
 @keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-3.5px)}}
-.mark:hover{filter:drop-shadow(2px 3px 0 rgba(28,25,23,.35))}
+/* Hover affordance. The scale lives on a wrapper <g>, not on the mark: the mark's
+   float keyframes own its transform, and the CSS `scale` property does not apply to
+   SVG shapes in Chromium. Two elements, two transforms, no conflict. */
+.mw{transition:transform .22s cubic-bezier(.34,1.56,.64,1)}
+.mw.hot{transform:scale(1.45)}
+.mark{transition:filter .22s}
+.mark.hot{filter:drop-shadow(2px 3px 0 rgba(28,25,23,.35))}
 .lane{fill:#f3e0da;stroke:#e0cec6;stroke-width:1.2}
 .lanelab{font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;fill:var(--faint);
          font-family:"Instrument Sans",sans-serif}
@@ -308,6 +314,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 @keyframes drop{0%{transform:scaleY(0)}45%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
 
 @media (prefers-reduced-motion:reduce){.mark,.path,.spin,.scrollcue i,.panel-body{animation:none!important;stroke-dashoffset:0}
+  .mark,.mw{transition:none!important}
   .card,.stepper,.series{transition:none!important}}
 @media (max-width:900px){
   .nav{flex-direction:column;align-items:flex-start;gap:12px;padding:14px 18px}
@@ -597,10 +604,12 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   document.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY});
   (function l(){cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;
     c.style.left=cx+'px';c.style.top=cy+'px';requestAnimationFrame(l)})();
-  document.querySelectorAll('a,button,.mark,.card').forEach(function(el){
-    el.addEventListener('mouseenter',function(){c.classList.add('hot')});
-    el.addEventListener('mouseleave',function(){c.classList.remove('hot')});
-  });
+  /* delegated: .hit areas and .pcard list cards are created after this runs,
+     so a static querySelectorAll would miss both */
+  document.addEventListener('mouseover',function(e){
+    if(e.target.closest&&e.target.closest('a,button,.hit,.card,.pcard'))c.classList.add('hot')});
+  document.addEventListener('mouseout',function(e){
+    if(e.target.closest&&e.target.closest('a,button,.hit,.card,.pcard'))c.classList.remove('hot')});
 
   var pills=[].slice.call(document.querySelectorAll('.pill')),
       g={work:document.getElementById('s-work'),proj:document.getElementById('s-proj')},
@@ -755,6 +764,12 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
     var n=N[m.dataset.id];if(!n)return;
     var b=m.getBBox(),cx=b.x+b.width/2,cy=b.y+b.height/2;
 
+    /* wrapper carries the hover scale, anchored on the mark's own centre */
+    var g=document.createElementNS(NS,'g');
+    g.setAttribute('class','mw');
+    g.style.transformOrigin=cx+'px '+cy+'px';
+    m.parentNode.insertBefore(g,m);g.appendChild(m);
+
     /* selection ring: sits on the mark, scales with it, survives a filter */
     var ring=document.createElementNS(NS,'circle');
     ring.setAttribute('class','selring');ring.setAttribute('cx',cx);
@@ -773,6 +788,11 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
     m.removeAttribute('role');m.removeAttribute('tabindex');m.removeAttribute('aria-label');
 
     function pick(){show(m.dataset.id,true);hit.focus()}
+    function hot(on){m.classList.toggle('hot',on);g.classList.toggle('hot',on)}
+    hit.addEventListener('mouseenter',function(){hot(true)});
+    hit.addEventListener('mouseleave',function(){hot(false)});
+    hit.addEventListener('focus',function(){hot(true)});
+    hit.addEventListener('blur',function(){hot(false)});
     hit.addEventListener('click',pick);
     hit.addEventListener('keydown',function(e){
       if(e.key==='Enter'||e.key===' '){e.preventDefault();pick()}
