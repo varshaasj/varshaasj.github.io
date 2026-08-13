@@ -383,7 +383,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
      vertical reference survives horizontal scrolling. Heights lock the rows together. -->
 <svg id="chart-axis" viewBox="0 0 168 546" aria-hidden="true">
   <text class="axt" x="0" y="26">↑ systems</text>
-  <text class="ylab" x="0" y="58">simulation · microstructure</text>
+  <text class="ylab" x="0" y="58">simulation</text>
   <text class="ylab" x="0" y="116">systems · security · perf</text>
   <text class="ylab" x="0" y="174">data · ML</text>
   <text class="ylab" x="0" y="232">backend · databases</text>
@@ -394,7 +394,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 </svg>
 
 <div class="plotscroll">
-<svg id="chart" viewBox="168 0 792 546" role="img" aria-label="Trajectory chart, 2021 to 2027. Two series: paid work and self-directed projects, plotted from user-facing to systems work. Self-directed projects reach market microstructure before employed work does. Leadership and personal interests appear in separate lanes below the axis.">
+<svg id="chart" viewBox="168 0 792 546" role="img" aria-label="Trajectory chart, 2021 to 2027. Two series: paid work and self-directed projects, plotted from user-facing to systems work. Self-directed projects reach market-making simulation before employed work does. Leadership and personal interests appear in separate lanes below the axis.">
   <g><line class="band" x1="168" y1="54" x2="940" y2="54"/><line class="band" x1="168" y1="112" x2="940" y2="112"/>
      <line class="band" x1="168" y1="170" x2="940" y2="170"/><line class="band" x1="168" y1="228" x2="940" y2="228"/>
      <line class="band" x1="168" y1="286" x2="940" y2="286"/><line class="band" x1="168" y1="344" x2="940" y2="344"/></g>
@@ -681,7 +681,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   'lead-advisor':{s:'lead',d:'2021–22',k:202108,t:'JFC Financial Advisor',
     e:'CMU Student Government',img:1},
   'lead-mentor':{s:'lead',d:'Jul 2026–present',k:202607,t:'Tech mentor',
-    e:'BluePrint',img:1},
+    e:'BluePrint'},
   'lead-lead':{s:'lead',d:'2022–23',k:202208,t:'JFC Lead Financial Advisor',
     e:'CMU Student Government',img:1,
     b:'Promoted to lead after two years as an advisor; trained and managed three advisors. Three budget cycles on a committee allocating roughly $2M annually across 250 organisations.'},
@@ -744,16 +744,16 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
        step back into it rather than trapping the user */
     if(i<0){
       /* current node is outside the pool (a placeholder, or filtered out).
-         Resume from the last in-pool node rather than jumping to the start;
-         placeholders carry no date, so "nearest" would always mean earliest. */
+         Resume from the last in-pool node rather than jumping to the start. */
       var j2=p.indexOf(lastReal);
       if(j2<0){show(dir>0?p[0]:p[p.length-1],true);return}
-      var j3=j2+dir;if(j3<0)j3=0;if(j3>=p.length)j3=p.length-1;
-      show(p[j3],true);return}
-    var j=i+dir;if(j<0||j>=p.length)return;show(p[j],true)}
-  function syncSteppers(){var p=pool(),i=p.indexOf(cur),off=(i<0&&p.length>0);
-    document.getElementById('p-prev').disabled=off?false:(i<=0);
-    document.getElementById('p-next').disabled=off?false:(i>=p.length-1)}
+      i=j2;
+    }
+    /* wraps: past the last node it rotates to the earliest, and back the other way */
+    var j=(i+dir+p.length)%p.length;show(p[j],true)}
+  function syncSteppers(){var none=(pool().length===0);
+    document.getElementById('p-prev').disabled=none;
+    document.getElementById('p-next').disabled=none}
 
   var NS='http://www.w3.org/2000/svg';
   marks.forEach(function(m){
@@ -841,7 +841,7 @@ var DETAIL={
     L:['A serverless application over the Spotify API that analyses an artist’s catalogue as a timeline rather than a list: career momentum, catalogue depth, and the gaps between releases and what they suggest about an artist’s eras.','Eight-plus REST endpoints on a FastAPI backend, with token and album-level caching, because paginated discographies otherwise burn through API quota on the first interesting question. Live, with active users.']},
   'p-imc':{s:'proj',t:'IMC Prosperity 4',e:'Algorithmic Trading Competition',d:'Apr–May 2026',k:202604,g:'PYTHON',
     L:['A global algorithmic trading competition, 18,803 teams, five rounds. Finished #1275 overall with 432,706 XIRECs against a 200,000 qualifying threshold, reaching the fifth and final round. Team of two.','In round two the market maker for the highest-volume product quoted around a hardcoded fair value of 10,000. Replacing that constant with a rolling mean over a fifteen-tick window, quoting ±6, doubled that product’s daily profit from about 7k to 15.8k. The fair value is not a constant.','The cross-product work covered fifty products across ten groups, running PCA to find common factor structure and testing a hundred candidate pairs for relationships worth trading.','Round one was a linear-regression signal with slope-based position sizing, which beat a moving-average baseline by 35%. Round three lost about 10,000: a trader that touched only two products, on badly chosen thresholds, written under time pressure.','Fifteen-plus trader versions across the competition, with every backtest compared to the live result. The backtester said 275,717 for round two and reality said around 324,000.']},
-  'p-facevalue':{s:'proj',t:'Face Value',e:'Market Microstructure Simulator',d:'Jul–Aug 2026',k:202607,g:'PYTHON · ORDER BOOK · MONTE CARLO · KALSHI',
+  'p-facevalue':{s:'proj',t:'Face Value',e:'Market-Making Simulator',d:'Jul–Aug 2026',k:202607,g:'PYTHON · ORDER BOOK · MONTE CARLO · KALSHI',
     L:['A market-making simulator built to answer one question: when a market maker loses money, where does it actually go? Solo. C++ port in progress.','The core is a limit order book with price-time priority and full matching semantics: partial fills, multi-level walking, cancellation. Price levels live in a sorted dict for O(log n) insert and ordered iteration, each level is a deque for O(1) FIFO, and a hash map from order ID to order makes cancellation O(1). Prices are integers, and a maker’s resting price sets the fill price. A public trade tape and per-agent fill queues model the fact that participants see the market through execution reports, not the book’s internals.','On top sits a discrete-event engine, a heap of timestamped callbacks with self-scheduling agents and Poisson arrivals via exponential gaps, written to be domain-agnostic, plus a Monte Carlo harness with paired designs across seeds, confidence intervals and parameter sweeps. Reproducibility comes from spawning independent generator streams from one seed, so the world’s path stays invariant when the agent mix changes.','The P&L decomposition splits profit into spread capture, inventory risk and terminal exposure, and asserts agreement with an independently computed total to 1e-12. Both accounting assertions caught real bugs the first time they ran.','What the simulation says. Adverse selection costs about 4.8¢ per fill going from 0% to 40% informed flow, across thirty seeds per cell. About 85% of a naive market maker’s loss is spread P&L rather than inventory. Inventory skewing moves inventory P&L from −184 to +201 but recovers only 38% of the loss and shows no mean improvement across fifty seeds; what it does is cut variance roughly threefold.','What the live data says. A recorder pulls seven Kalshi series every thirty seconds, writing only on change, which cut storage about 90%: 320,469 rows across 478 contracts over six days, through 165 real contract resolutions. Spreads widen 21× on information arrival, median 1¢ quiet to 21¢, monotonically across six buckets. Approaching resolution, market makers withdraw rather than widen, one-sided quotes going from 65% to 95%+ within eight hours. Across nested contract ladders 4.91% of adjacent pairs look like they violate monotonicity in mid-price, but only 0.13% are executable.','Two things that went wrong. A reference-price confound had inverted the sign of a measured effect, diagnosed by measuring mean absolute distance from fair value at 8.18¢ against 2.17¢. And a twelve-fold improvement on one seed proved indistinguishable from baseline across fifty. Every headline number is computed two independent ways.','Scope: not deployed, no users, no live trading, no real money. Six days of market data, not months. Stage 6 partial. No C++ performance numbers.']}
 };
 
