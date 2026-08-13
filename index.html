@@ -99,7 +99,7 @@ body{margin:0;background:var(--bg);color:var(--ink);
 /* the one genuine mid-value surface, breaks the pale-wash band */
 .c-blue{background:var(--blue-card)}
 /* a.c-blue outranks .card-link's color:inherit; without it the title stays ink on dark */
-a.c-blue,.c-blue .t-mid,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--cream)}
+a.c-blue,.c-blue .t-mid,.c-blue .arrow{color:var(--cream)}
 
 /* ---------- bento content classes (were inline) ---------- */
 .card-link{text-decoration:none;color:inherit}
@@ -107,7 +107,6 @@ a.c-blue,.c-blue .t-mid,.c-blue .t-sm,.c-blue .desc,.c-blue .arrow{color:var(--c
 .t-anchor{font-family:"Young Serif",serif;font-size:var(--t2)}
 .t-mid{font-family:"Young Serif",serif;font-size:var(--t2)}
 .arrow{font-size:var(--t3)}
-.desc{font-size:var(--t4);color:var(--soft);margin:8px 0 0}
 .desc-lg{font-size:var(--t3);color:var(--soft);margin:10px 0 0;max-width:24em}
 .tags{font-size:var(--t5);color:var(--soft);margin:14px 0 0;letter-spacing:.06em}
 .illo-svg{width:100%;max-width:250px;height:auto}
@@ -333,7 +332,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   .chartcard{overflow-x:visible}
   .fold,.bottom{grid-template-columns:1fr}
   .bento{grid-template-columns:1fr}
-  .b-face,.b-pros,.b-blue,.b-res,.b-illo{grid-column:auto}
+  .b-face,.b-illo{grid-column:auto}
   h1{font-size:29px}
 }
 </style></head>
