@@ -75,8 +75,9 @@ body{margin:0;background:var(--bg);color:var(--ink);
 .brand em{font-style:normal;font-family:"Inter",sans-serif;font-weight:400;
           color:var(--soft);font-size:var(--t3)}
 .navlinks{display:flex;gap:26px;font-size:var(--t5);letter-spacing:.14em;text-transform:uppercase}
-.navlinks a{color:var(--ink);text-decoration:none;position:relative;padding-bottom:2px}
-.navlinks a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1.5px;
+.navlinks a{color:var(--ink);text-decoration:none;position:relative;
+  padding:3px 0 5px;display:inline-block}
+.navlinks a::after{content:"";position:absolute;left:0;right:100%;bottom:3px;height:1.5px;
   background:var(--stroke);transition:right .45s cubic-bezier(.22,1,.36,1)}
 .navlinks a:hover::after{right:0}
 
@@ -301,7 +302,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
          min-height:190px}
 .contact .arrow{display:inline-block;font-size:var(--t2);transition:transform .45s cubic-bezier(.22,1,.36,1)}
 .contact:hover .arrow{transform:translate(4px,-4px)}
-.contact .q{font-size:var(--t5);color:var(--soft)}
+.contact .q{font-size:var(--t5);color:var(--ink)}
 .contact .big{font-family:"Inter",sans-serif;font-weight:600;font-size:var(--t1);line-height:1.05}
 .social{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
         gap:16px;font-size:var(--t5);
@@ -509,7 +510,7 @@ body.settled.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{an
     </div>
     <div class="panel-body" id="p-swap">
       <div class="panel-img" id="p-img" hidden></div>
-      <h3 class="panel-title" id="p-title"></h3>
+      <h2 class="panel-title" id="p-title"></h2>
       <p class="panel-text" id="p-text"></p>
       <div class="panel-ph" id="p-ph" hidden></div>
       <p class="panel-tags" id="p-tags"></p>
@@ -518,7 +519,7 @@ body.settled.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{an
   </section>
 
   <div class="bento" id="projects">
-    <a class="card b-face card-link" href="#">
+    <a class="card b-face card-link" href="#projects/p-facevalue">
       <div class="t t-row">
         <span class="t-anchor">Face Value</span>
         <span class="arrow">↗</span>
