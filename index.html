@@ -4,7 +4,7 @@
 <title>Varshaa Sekar Jayanthi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 .b-face{background:#2b2320!important;color:#fdf7f2}
 .b-face p{color:#c9b9b2!important}
@@ -50,7 +50,7 @@
 html{cursor:default}
 html.cur-ready{cursor:none}
 body{margin:0;background:var(--bg);color:var(--ink);
-     font-family:"Instrument Sans",system-ui,sans-serif;font-size:16px;line-height:1.6;
+     font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.6;
      -webkit-font-smoothing:antialiased}
 .shell{max-width:1120px;margin:0 auto;padding:26px 22px 64px}
 
@@ -58,10 +58,10 @@ body{margin:0;background:var(--bg);color:var(--ink);
 .nav{background:var(--card);border:1.6px solid var(--stroke);border-radius:20px;
      padding:16px 26px;display:flex;align-items:center;justify-content:space-between;
      margin-bottom:var(--gap-group)}
-.brand{font-family:"Young Serif",serif;font-size:var(--t2);letter-spacing:-.01em;
+.brand{font-family:"Inter",sans-serif;font-weight:600;font-size:var(--t2);letter-spacing:-.02em;
        text-decoration:none;color:inherit;transition:opacity .25s}
 .brand:hover{opacity:.62}
-.brand em{font-style:normal;font-family:"Instrument Sans",sans-serif;font-weight:400;
+.brand em{font-style:normal;font-family:"Inter",sans-serif;font-weight:400;
           color:var(--soft);font-size:var(--t3)}
 .navlinks{display:flex;gap:26px;font-size:var(--t5);letter-spacing:.14em;text-transform:uppercase}
 .navlinks a{color:var(--ink);text-decoration:none;position:relative;padding-bottom:2px}
@@ -103,8 +103,8 @@ a.c-blue,.c-blue .t-mid,.c-blue .arrow{color:var(--cream)}
 /* ---------- bento content classes (were inline) ---------- */
 .card-link{text-decoration:none;color:inherit}
 .t-row{display:flex;justify-content:space-between;align-items:flex-start}
-.t-anchor{font-family:"Young Serif",serif;font-size:var(--t2)}
-.t-mid{font-family:"Young Serif",serif;font-size:var(--t2)}
+.t-anchor{font-family:"Inter",sans-serif;font-weight:600;font-size:var(--t2)}
+.t-mid{font-family:"Inter",sans-serif;font-weight:600;font-size:var(--t2)}
 .arrow{font-size:var(--t3)}
 .desc-lg{font-size:var(--t3);color:var(--soft);margin:10px 0 0;max-width:24em}
 .tags{font-size:var(--t5);color:var(--soft);margin:14px 0 0;letter-spacing:.06em}
@@ -112,35 +112,35 @@ a.c-blue,.c-blue .t-mid,.c-blue .arrow{color:var(--cream)}
 /* ---------- routed views ---------- */
 .view{display:none}
 .view.on{display:block}
-.backlink{font-family:"Instrument Sans",sans-serif;font-size:var(--t5);letter-spacing:.12em;
+.backlink{font-family:"Inter",sans-serif;font-size:var(--t5);letter-spacing:.12em;
           text-transform:uppercase;color:var(--soft);text-decoration:none;
           border-bottom:1px solid var(--stroke-45);padding-bottom:2px}
 .backlink:hover{color:var(--ink);border-bottom-color:var(--stroke)}
 .list-head{padding:var(--gap-group) 0 0}
-.list-title{font-family:"Young Serif",serif;font-size:var(--t1);font-weight:400;margin:20px 0 6px}
+.list-title{font-family:"Inter",sans-serif;font-weight:600;letter-spacing:-.015em;font-size:var(--t1);font-weight:400;margin:20px 0 6px}
 .list-count{font-size:var(--t4);color:var(--soft);margin:0 0 var(--gap-group)}
 .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap-in);margin-top:var(--gap-in)}
 .pcard{display:block;background:var(--card);border:1.4px solid var(--stroke-70);
        border-radius:var(--rad-mid);padding:var(--pad-mid);text-decoration:none;color:inherit;
        transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s}
 .pcard:hover{transform:translateY(-3px);box-shadow:5px 7px 0 rgba(28,25,23,.13)}
-.pcard h3{font-family:"Young Serif",serif;font-size:var(--t2);font-weight:400;margin:0 0 6px}
+.pcard h3{font-family:"Inter",sans-serif;font-weight:600;font-size:var(--t2);font-weight:400;margin:0 0 6px}
 .pcard .sub{font-size:var(--t4);color:var(--soft);margin:0 0 12px}
-.pcard .meta{font-family:"Instrument Sans",sans-serif;font-size:var(--t5);color:var(--soft);
+.pcard .meta{font-family:"Inter",sans-serif;font-size:var(--t5);color:var(--soft);
              letter-spacing:.06em}
 .pcard .meta b{font-weight:400;color:var(--ink)}
 /* detail */
 .detail-hero{background:#2b2320;color:var(--cream);border-radius:var(--rad-anchor);
              padding:var(--pad-anchor);margin-top:var(--gap-group)}
-.detail-hero h2{font-family:"Young Serif",serif;font-size:var(--t1);font-weight:400;margin:20px 0 8px}
+.detail-hero h2{font-family:"Inter",sans-serif;font-weight:600;font-size:var(--t1);font-weight:400;margin:20px 0 8px}
 .detail-hero p{margin:0;color:#c9b9b2;font-size:var(--t3)}
-.detail-hero .detail-dates{font-family:"Instrument Sans",sans-serif;font-size:var(--t5);
+.detail-hero .detail-dates{font-family:"Inter",sans-serif;font-size:var(--t5);
                            letter-spacing:.12em;text-transform:uppercase;margin-top:10px}
 .backlink-dark{color:#c9b9b2;border-bottom-color:rgba(253,247,242,.35)}
 .detail-home{margin-left:18px}
 .backlink-dark:hover{color:var(--cream);border-bottom-color:var(--cream)}
 .detail-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.detail-tags span{font-family:"Instrument Sans",sans-serif;font-size:var(--t6);letter-spacing:.14em;
+.detail-tags span{font-family:"Inter",sans-serif;font-size:var(--t6);letter-spacing:.14em;
                   border:1px solid rgba(253,247,242,.45);border-radius:4px;padding:5px 9px}
 /* body copy aligns with the hero's inner text, not the hero's outer edge */
 .detail-body{padding:var(--gap-group) var(--pad-anchor) 0}
@@ -176,10 +176,10 @@ a.c-blue,.c-blue .t-mid,.c-blue .arrow{color:var(--cream)}
 .stepper:disabled{opacity:.32}
 .panel-body{animation:swapin .35s cubic-bezier(.22,1,.36,1)}
 @keyframes swapin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.panel-title{font-family:"Young Serif",serif;font-size:var(--t2);font-weight:400;margin:0 0 10px}
+.panel-title{font-family:"Inter",sans-serif;font-weight:600;letter-spacing:-.015em;font-size:var(--t2);font-weight:400;margin:0 0 10px}
 .panel-text{font-size:var(--t4);color:var(--soft);margin:0;max-width:62ch}
 .panel-tags{font-size:var(--t5);color:var(--soft);margin:14px 0 0;letter-spacing:.06em}
-.panel-link{display:inline-block;margin-top:16px;font-family:"Instrument Sans",sans-serif;
+.panel-link{display:inline-block;margin-top:16px;font-family:"Inter",sans-serif;
             font-size:var(--t5);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
             text-decoration:none;border-bottom:1.4px solid var(--stroke-70);padding-bottom:2px}
 .panel-link:hover{border-bottom-color:var(--stroke)}
@@ -210,11 +210,12 @@ a.c-blue,.c-blue .t-mid,.c-blue .arrow{color:var(--cream)}
         text-decoration:none;color:inherit}
 .resume .arrow{transition:transform .45s cubic-bezier(.22,1,.36,1)}
 .resume:hover .arrow{transform:translate(3px,-3px)}
-.resume .t-mid{font-family:"Young Serif",serif;font-size:var(--t2)}
+.resume .t-mid{font-family:"Inter",sans-serif;font-weight:600;font-size:var(--t2)}
 
 
-h1{font-family:"Young Serif",serif;font-size:var(--t1);line-height:1.16;margin:0 0 16px;font-weight:400}
-h1 .it{font-family:"Instrument Sans",sans-serif;font-style:italic;font-weight:400}
+h1{font-family:"Inter",sans-serif;font-weight:600;font-size:var(--t1);line-height:1.06;
+   margin:0 0 16px;letter-spacing:-.03em}
+h1 .it{font-weight:400}   /* weight contrast, not italic: one family now */
 h1 .blue{color:var(--blue-deep)}
 .hero p{font-size:var(--t3);color:var(--soft);margin:0;max-width:26em}
 /* separators as ::after so none dangles at a wrap */
@@ -229,12 +230,12 @@ h1 .blue{color:var(--blue-deep)}
 .chartcard{background:var(--cream);display:flex;flex-direction:column}
 .chead{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;
        margin-bottom:18px}
-.chead h2{font-family:"Instrument Sans",sans-serif;font-size:var(--t6);letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin:0 0 8px;font-weight:500}
+.chead h2{font-family:"Inter",sans-serif;font-size:var(--t6);letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin:0 0 8px;font-weight:500}
 .chead p{margin:0;font-size:var(--t4);color:var(--soft);max-width:34em}
 .filters{display:flex;gap:8px;flex-wrap:wrap}
 .pill:focus-visible,.navlinks a:focus-visible,.card:focus-visible{outline:2px solid var(--blue-deep);outline-offset:3px}
 .pill{min-height:40px;border:1.5px solid var(--stroke);background:transparent;border-radius:999px;
-      padding:7px 16px;font-family:"Instrument Sans",sans-serif;font-size:var(--t5);color:var(--ink);
+      padding:7px 16px;font-family:"Inter",sans-serif;font-size:var(--t5);color:var(--ink);
       cursor:none;transition:all .45s cubic-bezier(.22,1,.36,1)}
 .pill:hover{transform:translateY(-2px)}
 .pill.on{background:var(--ink);color:var(--cream)}
@@ -248,15 +249,17 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
   background:linear-gradient(to right,rgba(253,247,242,0),rgba(253,247,242,.96))}
 .chartwrap.more::after{opacity:1}
 .band{stroke:#cdb6ac;stroke-width:1.2;stroke-dasharray:2 7}
-.ylab{font-size:15px;fill:var(--soft);font-family:"Instrument Sans",sans-serif}
+/* Inter runs wider than the previous face; -.01em keeps the longest row,
+   "systems · security · perf", inside the 168-unit axis column */
+.ylab{font-size:15px;fill:var(--soft);font-family:"Inter",sans-serif;letter-spacing:-.012em}
 .axt{font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;fill:var(--faint);
-     font-family:"Instrument Sans",sans-serif}
-.yr{font-size:15px;fill:var(--faint);font-family:"Instrument Sans",sans-serif}
+     font-family:"Inter",sans-serif}
+.yr{font-size:15px;fill:var(--faint);font-family:"Inter",sans-serif}
 .series{transition:opacity .7s cubic-bezier(.22,1,.36,1)}
 .series.dim{opacity:.1}
-.series.dim .lbl,.series.dim .lbl{font-size:15.5px;fill:var(--soft);pointer-events:none;font-family:"Instrument Sans",sans-serif;
+.series.dim .lbl,.series.dim .lbl{font-size:15.5px;fill:var(--soft);pointer-events:none;font-family:"Inter",sans-serif;
      paint-order:stroke fill;stroke:var(--halo,var(--cream));stroke-width:2.4px;stroke-linejoin:round}
-.lbl.big{font-size:18px;fill:var(--ink);font-family:"Young Serif",serif}
+.lbl.big{font-size:18px;fill:var(--ink);font-family:"Inter",sans-serif;font-weight:600}
 /* leader: used only where a label cannot sit near its mark without crossing a path */
 .leader{stroke:var(--faint);stroke-width:1;opacity:.55;pointer-events:none}
 .series.dim .leader{opacity:0}
@@ -279,8 +282,8 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 .mark.hot{filter:drop-shadow(2px 3px 0 rgba(28,25,23,.35))}
 .lane{fill:#f3e0da;stroke:#e0cec6;stroke-width:1.2}
 .lanelab{font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;fill:var(--faint);
-         font-family:"Instrument Sans",sans-serif}
-.ph{font-size:15px;fill:#a98fa0;font-style:italic;font-family:"Instrument Sans",sans-serif}
+         font-family:"Inter",sans-serif}
+.ph{font-size:15px;fill:#a98fa0;font-style:italic;font-family:"Inter",sans-serif}
 
 
 /* ---------- bottom ---------- */
@@ -290,7 +293,7 @@ svg#chart{width:100%;height:auto;display:block;overflow:visible}
 .contact .arrow{display:inline-block;font-size:var(--t2);transition:transform .45s cubic-bezier(.22,1,.36,1)}
 .contact:hover .arrow{transform:translate(4px,-4px)}
 .contact .q{font-size:var(--t5);color:var(--soft)}
-.contact .big{font-family:"Young Serif",serif;font-size:var(--t1);line-height:1.05}
+.contact .big{font-family:"Inter",sans-serif;font-weight:600;font-size:var(--t1);line-height:1.05}
 .social{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
         gap:16px;font-size:var(--t5);
         letter-spacing:.14em;text-transform:uppercase}
