@@ -444,7 +444,7 @@ body.settled.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{an
 
   <g class="series" id="s-work">
     <path class="path" style="stroke:var(--ink);animation-delay:.1s"
-      d="M205,344 L255,228 L340,170 L465,286 L540,228 L640,222 L810,164 L875,112"/>
+      d="M205,344 L255,228 L340,170 L465,286 L540,228 L640,222 L810,164 L848,232 L875,112"/>
     <g fill="var(--terra)">
       <circle class="mark" data-id="w-rebloom" cx="205" cy="344" r="6" style="animation-delay:.5s,0s"/>
       <circle class="mark" data-id="w-cmuit"   cx="255" cy="228" r="6" style="animation-delay:.7s,.4s"/>
@@ -453,6 +453,7 @@ body.settled.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{an
       <circle class="mark" data-id="w-upmcbe"  cx="540" cy="228" r="6" style="animation-delay:1.3s,1.6s"/>
       <circle class="mark" data-id="w-zelis"   cx="640" cy="222" r="6" style="animation-delay:1.5s,2s"/>
       <circle class="mark" data-id="w-nu"      cx="810" cy="164" r="6" style="animation-delay:1.7s,2.4s"/>
+      <circle class="mark" data-id="w-tenacitics"   cx="848" cy="232" r="6" style="animation-delay:1.8s,2.6s"/>
       <circle class="mark" data-id="w-bp"      cx="875" cy="112" r="8.5" style="animation-delay:1.9s,2.8s"/></g>
     <g><text class="lbl" x="205" y="366" text-anchor="middle">re:Bloom</text>
        <text class="lbl" x="178" y="168">CMU Student Affairs</text>
@@ -460,7 +461,8 @@ body.settled.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{an
        <text class="lbl" x="465" y="310" text-anchor="middle">UPMC · QA</text>
        <text class="lbl" x="530" y="214" text-anchor="end">UPMC · backend</text>
        <text class="lbl" x="640" y="250" text-anchor="middle">Zelis</text>
-       <text class="lbl" x="820" y="186">NU research</text>
+       <text class="lbl" x="822" y="132" text-anchor="end">NU research</text>
+       <text class="lbl" x="858" y="236">Tenacitics</text>
        <text class="lbl big" x="885" y="96" text-anchor="middle">BluePrint</text></g>
   </g>
 
@@ -550,7 +552,7 @@ body.settled.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{an
   <!-- bottom -->
   <div class="bottom" id="contact">
     <!-- href stays "#" until the PDF exists -->
-    <a class="card resume c-blue card-link" href="#">
+    <a class="card resume c-blue card-link" href="Varshaa_Sekar_Jayanthi_Resume.pdf">
       <div class="t-row">
         <span class="t-mid">Resume</span>
         <span class="arrow">↗</span>
@@ -654,8 +656,12 @@ body.settled.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{an
     g:'C# / .NET · MS SQL SERVER'},
   'w-zelis':{s:'work',d:'Jun 2024–Aug 2025',k:202406,t:'Zelis Healthcare',
     e:'Software Developer, Consultant (via Computer Enterprises Inc.)',
-    b:'Six major features on a large-scale healthcare payments platform. Optimised SQL calls to the database, improving query performance by around 40%.',
+    b:'Ten major features on a large-scale healthcare payments platform. Optimised SQL calls to the database, improving query performance by around 40%.',
     g:'C# / .NET · REACT · SQL'},
+  'w-tenacitics':{s:'work',d:'Jun 2026–present',k:202606,t:'Tenacitics, Inc.',
+    e:'AI Engineer Intern',
+    b:'An internal platform for deploying SQL changes, replacing a ticket-and-email handoff between developers and DBAs. Submissions run against four environments with transactional execution, enforced timeouts and role separation at the API layer.',
+    g:'FULL-STACK · SQL · ACCESS CONTROL'},
   'w-nu':{s:'work',d:'Jan–Jun 2026',k:202601,t:'Northwestern',
     e:'Graduate Researcher',
     b:'LLM agent evaluation for infrastructure generation. Ran three experimental arms across 400+ evaluations, co-built a bounded repair loop giving the agent ten attempts to recover from precondition failures, and authored the results ledger separating genuine evaluator outcomes from infrastructure noise. Paper in preparation.',
@@ -832,7 +838,7 @@ var DETAIL={
   'w-upmc':{s:'work',t:'UPMC Corporate Services',e:'Software Engineer',d:'Jul 2023–Jun 2024',k:202307,g:'C# / .NET · MS SQL SERVER · CYPRESS · PLAYWRIGHT',
     L:['A year on a Health Plan web application, split between building it and making it trustworthy.','The build half was around twenty features in C#/.NET against MS SQL Server: new API endpoints, integrations with other UPMC systems, and a body of stored procedures, schema changes and migrations. Owned the lower-environment database. Narrowed and paginated endpoints that were over-fetching, measuring response time and payload before and after.','The other half was tests and visibility. Fifty-plus Cypress and Playwright tests feeding release gating took production error rates down 47%.','The application ran in ten environments and Azure DevOps could not show test detail across them, so a failure cost about twenty minutes just to identify. Built a full-stack view tracking every ticket’s state in testing, linked to its feature, the developer who built it, and exactly which environments it passed and failed in. The view was used at executive level.']},
   'w-zelis':{s:'work',t:'Computer Enterprises Inc.',e:'Software Developer, Consultant. Client: Zelis Healthcare',d:'Jun 2024–Aug 2025',k:202406,g:'C# / .NET · REACT · SQL',
-    L:['Fourteen months embedded with the client’s engineering team as the vendor-side owner, on a healthcare payments platform: the systems that decide what a claim costs and who pays it. Six major features in C#/.NET and React.','Database performance work: joins were structured for how someone thought about the problem rather than how the planner executes it, indexes were missing on predicates that had become hot, and SELECT statements pulled columns nobody read. Rewriting those took performance up 40%.','Also built an LLM pipeline into the data-migration workflow: 10+ migrations, 98% accuracy against manual verification, and a 20% cut in cycle time. The pipeline was designed to fail loudly rather than plausibly.']},
+    L:['Fourteen months embedded with the client’s engineering team as the vendor-side owner, on a healthcare payments platform: the systems that decide what a claim costs and who pays it. Ten major features in C#/.NET and React.','Database performance work: joins were structured for how someone thought about the problem rather than how the planner executes it, indexes were missing on predicates that had become hot, and SELECT statements pulled columns nobody read. Rewriting those took performance up 40%.','Also built an LLM pipeline into the data-migration workflow: 10+ migrations, 98% accuracy against manual verification, and a 20% cut in cycle time. The pipeline was designed to fail loudly rather than plausibly.']},
   'w-nu':{s:'work',t:'Northwestern University',e:'Graduate Researcher, MSIT 499 Agentic Systems Evaluation',d:'Jan–Jun 2026',k:202601,g:'PYTHON · LLM EVALUATION · KUBERNETES',
     L:['A multi-agent system that diagnoses and repairs broken Kubernetes and Docker configurations. The research question was whether a verifier-grounded memory layer, storing facts with typed validity conditions rather than as loose text, actually improves an agent’s ability to finish a task.','Ran the ablation that answers it: the same 155 tasks through three pipeline configurations, 400+ evaluation runs on GPT-5.5, with and without the memory layer. Accuracy went from 54% to 78.5%.','Co-built the repair loop, which came out of the measurement. Reading failures at iteration granularity, the dominant failure mode was the environment never reaching a valid pre-state, so the agent was asked to fix something that had not finished initialising. One task failed twenty consecutive times for that reason alone. The loop gives ten bounded attempts to establish preconditions before a task counts as failed.','Four task tables disagreed with each other, 273, 400 and 462 rows against 534 directories on disk, and were reconciled before compute went into a run that would have been invalid. Tasks with an explain contract were also being routed to an evaluator that could only handle a debug contract, which raised on every one.','Contributor on a paper in preparation.']},
   'w-tenacitics':{s:'work',t:'Tenacitics, Inc.',e:'AI Engineer Intern',d:'Jun 2026–present',k:202606,g:'FULL-STACK · SQL · ACCESS CONTROL',
