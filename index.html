@@ -444,13 +444,12 @@ body.settled.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{an
 
   <g class="series" id="s-work">
     <path class="path" style="stroke:var(--ink);animation-delay:.1s"
-      d="M205,344 L255,228 L340,170 L465,286 L540,228 L640,222 L810,164 L848,232 L875,112"/>
+      d="M205,344 L255,228 L340,170 L465,257 L640,222 L810,164 L848,232 L875,112"/>
     <g fill="var(--terra)">
       <circle class="mark" data-id="w-rebloom" cx="205" cy="344" r="6" style="animation-delay:.5s,0s"/>
       <circle class="mark" data-id="w-cmuit"   cx="255" cy="228" r="6" style="animation-delay:.7s,.4s"/>
       <circle class="mark" data-id="w-dsw"     cx="340" cy="170" r="6" style="animation-delay:.9s,.8s"/>
-      <circle class="mark" data-id="w-upmcqa"  cx="465" cy="286" r="6" style="animation-delay:1.1s,1.2s"/>
-      <circle class="mark" data-id="w-upmcbe"  cx="540" cy="228" r="6" style="animation-delay:1.3s,1.6s"/>
+      <circle class="mark" data-id="w-upmc"    cx="465" cy="257" r="6" style="animation-delay:1.1s,1.2s"/>
       <circle class="mark" data-id="w-zelis"   cx="640" cy="222" r="6" style="animation-delay:1.5s,2s"/>
       <circle class="mark" data-id="w-nu"      cx="810" cy="164" r="6" style="animation-delay:1.7s,2.4s"/>
       <circle class="mark" data-id="w-tenacitics"   cx="848" cy="232" r="6" style="animation-delay:1.8s,2.6s"/>
@@ -458,8 +457,7 @@ body.settled.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{an
     <g><text class="lbl" x="205" y="366" text-anchor="middle">re:Bloom</text>
        <text class="lbl" x="178" y="168">CMU Student Affairs</text>
        <text class="lbl" x="345" y="140" text-anchor="middle">DSW</text>
-       <text class="lbl" x="465" y="310" text-anchor="middle">UPMC · QA</text>
-       <text class="lbl" x="530" y="214" text-anchor="end">UPMC · backend</text>
+       <text class="lbl" x="465" y="281" text-anchor="middle">UPMC</text>
        <text class="lbl" x="640" y="250" text-anchor="middle">Zelis</text>
        <text class="lbl" x="822" y="132" text-anchor="end">NU research</text>
        <text class="lbl" x="858" y="236">Tenacitics</text>
@@ -646,14 +644,10 @@ body.settled.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{an
     e:'BI / Data Analyst Intern',
     b:'Built a PowerBI playbook used in production to track and predict failures across 500+ overnight data integration jobs. Also wrote a Python forecasting script estimating brand performance by geographic area, used to inform which brands DSW would sign.',
     g:'POWERBI · PYTHON · MICROSTRATEGY'},
-  'w-upmcqa':{s:'work',d:'Jul–Dec 2023',k:202307,t:'UPMC, QA rotation',
-    e:'Systems Analyst',
-    b:'Around 50 automated and manual tests with regression analysis, end-to-end coverage and CI/CD integration.',
-    g:'CYPRESS · PLAYWRIGHT · CI/CD'},
-  'w-upmcbe':{s:'work',d:'Jan–Jun 2024',k:202401,t:'UPMC, backend rotation',
-    e:'Systems Analyst',
-    b:'Developed roughly 20 full-stack features for a health plan web application and owned the entire lower-environment database.',
-    g:'C# / .NET · MS SQL SERVER'},
+  'w-upmc':{s:'work',d:'Jul 2023–Jun 2024',k:202307,t:'UPMC Corporate Services',
+    e:'Software Engineer',
+    b:'Developed roughly 20 full-stack features for a Health Plan web application and owned the entire lower-environment database. Built regression and end-to-end coverage integrated into CI/CD, gating releases.',
+    g:'C# / .NET · MS SQL SERVER · CYPRESS · PLAYWRIGHT · CI/CD'},
   'w-zelis':{s:'work',d:'Jun 2024–Aug 2025',k:202406,t:'Zelis Payments',
     e:'Software Developer, Consultant (via Computer Enterprises Inc.)',
     b:'Ten major features on a large-scale healthcare payments platform. Optimised SQL calls to the database, improving query performance by around 40%.',
@@ -667,7 +661,7 @@ body.settled.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{an
     b:'LLM agent evaluation for infrastructure generation. Ran three experimental arms across 400+ evaluations, co-built a bounded repair loop giving the agent ten attempts to recover from precondition failures, and authored the results ledger separating genuine evaluator outcomes from infrastructure noise. Paper in preparation.',
     g:'PYTHON · LLM EVALUATION · KUBERNETES'},
   'w-bp':{s:'work',d:'Jul 2026–present',k:202607,t:'BluePrint',
-    e:'Software / AI Engineer',
+    e:'Software Engineer',
     b:'An AI-orchestrated SDLC governance platform, built using itself. 24 pull requests merged to main in 34 days across four sprints. Found three live security defects: two P0 cross-tenant data exposures and one P1, all of them surfaced while building unrelated features. Took a recursive graph query from 31 seconds to 183ms, with output proven set-identical across the change.',
     g:'TYPESCRIPT · POSTGRESQL · REACT'},
 
@@ -738,7 +732,7 @@ body.settled.chart-off .mark,body.chart-off .spin,body.chart-off .scrollcue i{an
     el.tags.textContent=n.g||'';el.tags.hidden=!n.g;
     /* chart node ids match DETAIL ids, except the two UPMC rotations which the
        work page presents as a single year */
-    var did=(id==='w-upmcqa'||id==='w-upmcbe')?'w-upmc':id;
+    var did=id;
     var more=document.getElementById('p-more');
     if(typeof DETAIL!=='undefined'&&DETAIL[did]){
       more.href='#'+(DETAIL[did].s==='work'?'work':'projects')+'/'+did;more.hidden=false}
