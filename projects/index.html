@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Varshaa Sekar Jayanthi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f5; --ink:#1c1917; --soft:#625d66;
+  --violet:#4B3A9C; --panel:#F1EEFA;
+  --display:"Inter Tight",Inter,system-ui,sans-serif;
+  --serif:"Newsreader",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+p{margin:0 0 .8em}
+ul,ol,dl,dd{margin:0;padding:0}
+
+/* page + 12-column grid */
+.page{max-width:816px;margin:0 auto;padding:72px 72px 88px}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:16px}
+.main{grid-column:1/8}
+.note{grid-column:9/13;font-size:12px;line-height:1.5;color:var(--soft)}
+.half-l{grid-column:1/7}
+.half-r{grid-column:7/13}
+.block{margin:0 0 26px}
+
+/* type scale */
+.title{font:700 84px/.95 var(--display);color:var(--violet);margin:0 0 14px}
+.sections{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:13px;margin:0 0 34px}
+.sections a{color:var(--violet)}
+.question{font:600 30px/1.18 var(--display);margin:0 0 16px}
+.question.wide{max-width:20em;margin-bottom:22px}
+.label{font:600 14px/1.3 Inter,sans-serif;color:var(--violet);margin:0 0 12px}
+h3{font:600 14px/1.3 Inter,sans-serif;margin:0 0 8px}
+figure{margin:0}
+figcaption{font-size:12px;line-height:1.5;color:var(--soft);margin-top:8px}
+
+/* overview, in the margin */
+.overview dt{font:600 12px/1.3 Inter,sans-serif;color:var(--violet);margin:0 0 2px}
+.overview dd{margin:0 0 12px;color:var(--ink)}
+
+/* user-story cards */
+.cards{list-style:none;row-gap:14px}
+.cards li{grid-column:span 4;background:var(--panel);padding:14px 16px;font-size:13px;line-height:1.45}
+.cards b{display:block;font:600 14px/1.3 var(--display);color:var(--violet);margin-bottom:4px}
+
+/* my words: serif, on lavender */
+.voice{background:var(--panel);padding:24px 28px 14px;font:400 19px/1.45 var(--serif)}
+.voice .label{font-family:Inter,sans-serif}
+.voice .headline{font:500 26px/1.2 var(--serif);color:var(--violet);margin:0 0 12px}
+.pull{margin:0}
+.pull .big{font:400 36px/1.1 var(--serif);color:var(--violet);margin:0 0 8px}
+.pull .rest{font:400 20px/1.4 var(--serif);margin:0}
+
+/* sketches sit on lavender */
+.sketch{background:var(--panel);padding:16px}
+.sketch img{margin:0 auto}
+
+/* cover */
+.cover .title{font-size:104px;margin:0 0 40px}
+.intro{font:400 24px/1.4 var(--serif)}
+.links a{display:block;color:var(--violet)}
+.projects{list-style:none;margin-top:56px}
+.projects li{margin:0 0 18px}
+.projects .thumb{grid-column:1/4;width:100%;aspect-ratio:3/2;object-fit:cover}
+.projects .name{grid-column:4/13;align-self:center}
+.projects b{display:block;font:600 22px/1.2 var(--display)}
+.projects span{color:var(--soft);font-size:14px}
+
+/* diary: text in the body columns, date in the margin */
+.diary .note{font:600 14px/1.5 var(--display);color:var(--violet)}
+.versions{list-style:none}
+.versions li{margin:0 0 10px}
+.versions b{display:block;color:var(--violet);font-weight:600}
+.bullets{padding-left:18px}
+.bullets li{margin:0 0 8px}
+.demo video{width:100%}
+.hero img{max-height:420px;width:auto}
+.hero-chart img{max-height:440px;width:auto}
+.close{margin-top:40px}
+.close .thanks{font:400 30px/1.2 var(--serif);color:var(--violet);margin:0 0 10px}
+.close a{color:var(--violet);margin-right:22px}
+
+.only-print{display:none}
+
+@media screen and (max-width:720px){
+  .page{padding:56px 20px 64px}
+  .main,.note,.half-l,.half-r,.projects .thumb,.projects .name,.cards li{grid-column:1/-1}
+  .note{margin-top:10px}
+  .half-r{margin-top:22px}
+  .title{font-size:52px}.cover .title{font-size:60px}
+  .question{font-size:24px}
+  .projects .thumb{max-width:240px;margin-bottom:8px}
+}
+
+@page{size:Letter;margin:0}
+@media print{
+  body{font-size:10.5pt;line-height:1.5}
+  .page{max-width:none;width:8.5in;height:11in;overflow:hidden;break-after:page;padding:.7in .75in .6in}
+  .page:last-child{break-after:auto}
+  .title{font-size:64pt}
+  .cover .title{font-size:66pt}
+  .title.long{font-size:54pt}
+  .projects{margin-top:36px}
+  .projects .thumb{grid-column:1/3}
+  .projects .name{grid-column:3/13}
+  .hero img{max-height:none;width:100%}
+  .question.wide{max-width:none}
+  .block{margin-bottom:18px}
+  .question.wide{margin-bottom:14px}
+  .title{margin-bottom:10px}
+  .hero-chart img{max-height:380px}
+  .fv-sketch{max-height:290px}
+  .kh-sketch img{max-height:240px}
+  .diary .block{margin-bottom:18px}
+  .sections{font-size:9pt;margin-bottom:26px}
+  .question{font-size:22pt}
+  .label,h3{font-size:11pt}
+  .note,figcaption{font-size:8.5pt}
+  .overview dt{font-size:8.5pt}
+  .cards li{font-size:9pt}
+  .cards b{font-size:10.5pt}
+  .diary .note{font-size:10pt}
+  .voice{font-size:13.5pt;padding:16px 22px 8px}
+  .voice .headline{font-size:19pt}
+  .intro{font-size:18pt}
+  .pull .big{font-size:26pt}
+  .pull .rest{font-size:15pt}
+  .projects b{font-size:15pt}
+  .projects span{font-size:10pt}
+  .close .thanks{font-size:22pt}
+  .only-web{display:none}
+  .only-print{display:block}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="page cover">
+  <h1 class="title">Varshaa<br>Sekar<br>Jayanthi</h1>
+  <div class="grid">
+    <div class="main intro"><p>I am a technologist who starts with people. Before I build anything, I want to understand what someone actually needs, and once it exists, I test it against the real world until I can trust it. The three projects here follow that loop in very different settings: a brokerage's internal documents, a power grid, and a concert ticket that refused to get cheaper.</p></div>
+    <div class="note links">
+      <a href="mailto:varshaa0801@gmail.com">varshaa0801@gmail.com</a>
+      <a href="https://github.com/varshaasj">GitHub</a>
+      <a href="https://www.linkedin.com/in/varshaasj/">LinkedIn</a>
+      <a href="https://varshaasj.github.io/Varshaa_Sekar_Jayanthi_Resume.pdf">Resume</a>
+      <a class="only-print" href="https://varshaasj.github.io/projects/">varshaasj.github.io/projects</a>
+    </div>
+  </div>
+  <ol class="projects">
+    <li><a class="grid" href="#knowledge-hub"><img class="thumb" src="assets/thumb-kh.jpg" alt=""><span class="name"><b>Internal Knowledge Hub</b><span>How can a brokerage's staff get answers from their own documents without the AI inventing anything?</span></span></a></li>
+    <li><a class="grid" href="#pjm"><img class="thumb" src="assets/thumb-pjm.jpg" alt=""><span class="name"><b>Will PJM have enough power in 2030?</b><span>How can an analyst who is not a grid specialist see whether PJM will have enough power in 2030, and why?</span></span></a></li>
+    <li><a class="grid" href="#face-value"><img class="thumb" src="assets/thumb-fv.jpg" alt=""><span class="name"><b>Face Value</b><span>How do you study a market whose prices are hidden?</span></span></a></li>
+  </ol>
+</section>
+
+<!-- KNOWLEDGE HUB -->
+<section class="page" id="knowledge-hub">
+  <h2 class="title">Internal<br>Knowledge Hub</h2>
+  <nav class="sections"><a href="#kh-overview">Overview</a><a href="#kh-need">How we framed the need</a><a href="#kh-process">Process</a><a href="#kh-building">Building it</a><a href="#kh-outcome">Outcome</a><a href="#kh-took">What I took from it</a><a href="#kh-next">What I would change next</a></nav>
+  <p class="question wide">How can a brokerage's staff get answers from their own documents without the AI inventing anything?</p>
+  <div class="grid block" id="kh-overview">
+    <div class="main">
+      <p>Before the hub, finding an answer meant searching for the right document by hand, then reading through it to work out the answer yourself. It was slow every time.</p>
+  <figure class="hero only-print" style="margin-top:14px"><img src="assets/kh-demo-hero.jpg" alt="The hub answering explain the CBOE document, with three cited sources and their page numbers"><figcaption>Every answer lists its sources and page numbers, so staff can check it. The full demo is on the <a href="https://varshaasj.github.io/projects/" style="color:var(--violet)">website</a>.</figcaption></figure>
+    </div>
+    <dl class="note overview">
+      <dt>Timeline</dt><dd>September 2026 to now</dd>
+      <dt>My role</dt><dd>Team lead; product and UI; prompt and retrieval tuning; client demo</dd>
+      <dt>Team</dt><dd>Four, at Northwestern Forge. My teammates built the infrastructure that indexes the documents and runs the models.</dd>
+      <dt>Background</dt><dd>Advantage Futures is a futures brokerage. Its staff needed answers from internal documents.</dd>
+      <dt>Outcome</dt><dd>Demoed to the client and now being deployed on staff machines.</dd>
+    </dl>
+  </div>
+  <figure class="demo only-web"><video src="assets/kh-demo.mp4" poster="assets/kh-demo-still.jpg" controls muted playsinline preload="metadata" aria-label="Demo: a search, then the question explain the CBOE document answered with page citations, then a question about Kalshi that the hub says it cannot find"></video></figure>
+</section>
+
+<section class="page">
+  <p class="label" id="kh-need">How we framed the need</p>
+  <div class="grid">
+    <p class="main">We started from 21 user stories in five groups. These five shaped the interface most.</p>
+  </div>
+  <ol class="grid cards block">
+    <li><b>Find it in a few words</b>Type a few words and get the right document, without knowing which folder it is in.</li>
+    <li><b>Answers with sources</b>Every answer cites its source. If the documents do not cover the question, the hub says so instead of guessing.</li>
+    <li><b>The exact section</b>The answer points to the section it came from, so staff can check it in context.</li>
+    <li><b>When it was updated</b>Every document shows when it was last updated.</li>
+    <li><b>Current versions only</b>Search and answers use only the latest version of each document.</li>
+  </ol>
+  <div class="grid block">
+    <p class="main">Before building, we also wrote a press release for the finished hub and worked backwards from it.</p>
+  </div>
+  <p class="label" id="kh-process">Process</p>
+  <figure class="block"><h3>The answer shows where it came from</h3><img src="assets/annotated/annot-kh-citations.jpg" alt="The cited sources, marked up by hand: the full filenames crossed out, the section names and page numbers underlined"><figcaption>The section and page are what people need; the full filename is not.</figcaption></figure>
+  <figure class="block"><h3>And when it does not know</h3><img src="assets/annotated/annot-kh-not-found.jpg" alt="Asked how to trade stocks on Kalshi, the hub replies &quot;I couldn't find this in the indexed documents&quot;, marked OK by hand"><figcaption>This is the behavior I wanted: it says so instead of guessing.</figcaption></figure>
+  <figure class="only-web block"><video src="assets/kh-refusal-loop.mp4" poster="assets/kh-refusal-poster.jpg" autoplay muted loop playsinline aria-label="Asked how to trade stocks on Kalshi, the hub looks through the documents and replies that it could not find this"></video><figcaption>At a regulated brokerage, a plain "could not find" is safer than a guess.</figcaption></figure>
+</section>
+
+<section class="page">
+  <div class="grid block">
+    <div class="main"><p>I tuned the prompts and retrieval settings until answers stayed inside the documents. Where the exact wording mattered, the hub quotes the document directly.</p></div>
+  </div>
+  <figure class="sketch block kh-sketch"><img src="assets/sketch-knowledge-hub-clean.jpg" alt="Notebook sketch: the retrieval screen with question box, answer and citation, and the edge-case screen saying &quot;I don't have the information&quot;, with the questions where does user type and what happens with scroll"><figcaption></figcaption></figure>
+  <div class="voice block">
+    <p class="label">Why only the documents</p>
+    <p>Advantage Futures already had the answers its staff needed. The problem was finding them: a large number of documents spread across departments, and no quick way to know which one held the answer. So the hub works in two steps. It first finds the right document, and if that is not enough, staff can ask a follow-up question and the hub finds the answer inside it. At a regulated brokerage, the model should never fill gaps with assumptions, so it answers from the documents or says it does not know.</p>
+  </div>
+  <p class="label" id="kh-building">Building it</p>
+  <div class="grid block">
+    <div class="main">
+      <p>I built the whole interface and owned the product decisions: what a person sees, and especially what they see when the tool does not know the answer. My teammates built the infrastructure that indexes the documents and runs the models.</p>
+    </div>
+    <ol class="note versions">
+      <li><b>First version</b>Search and answers with citations</li>
+      <li><b>v2</b>I noticed answers felt slow, so now they stream in word by word.</li>
+      <li><b>v3</b>I caught "What is rule 3?" failing, so numbered sections are now quoted word for word.</li>
+      <li><b>v4</b>Long PDFs keep their real section names.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="page">
+  <p class="label" id="kh-outcome">Outcome</p>
+  <div class="grid block">
+    <div class="main"><p>We demoed the hub to the client, and it is now being deployed on staff machines. At the demo the company said this was what they wanted. The next step is a proposed move to Amazon Bedrock inside Advantage Futures' own AWS account, estimated to start answering in about a second.</p></div>
+  </div>
+  <div class="voice block" id="kh-took">
+    <p class="label">What I took from it</p>
+    <p class="headline">Not every company should use all of a technology</p>
+    <p>On the surface, an internal AI tool is a question of capability. At Advantage Futures, it was a question of trust. The firm is highly regulated, and a data leak would cost it far more than it would cost most companies, so for its first internal AI application we kept its documents away from public models. The demo runs entirely on one machine the firm supplied, so no document text leaves it, and the next step we proposed moves the AI models to Amazon Bedrock inside the firm's own AWS account, reached over private network links, so the data still never leaves its control.</p>
+    <p>Building with Claude as a coding agent taught the same lesson from another side. The agent wrote code quickly, but the architecture and design decisions still had to come from us, built in pieces small enough to check. After two years of testing at UPMC and Zelis, I do not trust a system until it survives its edge cases. The "rule 3" failure surfaced only because I went looking for one.</p>
+  </div>
+  <div class="voice" id="kh-next">
+    <p class="label">What I would change next</p>
+    <p>Next, I would remove the filename from citations and show only the section and page. Marking up the screens made it clear that this is what people actually look for.</p>
+  </div>
+</section>
+
+<!-- PJM -->
+<section class="page" id="pjm">
+  <h2 class="title long">Will PJM have<br>enough power<br>in 2030?</h2>
+  <nav class="sections"><a href="#pjm-overview">Overview</a><a href="#pjm-process">Process</a><a href="#pjm-building">Building it</a><a href="#pjm-outcome">Outcome</a><a href="#pjm-took">What I took from it</a><a href="#pjm-next">What I would change next</a></nav>
+  <p class="question wide">How can an analyst who is not a grid specialist see whether PJM will have enough power in 2030, and why?</p>
+  <div class="grid block" id="pjm-overview">
+    <div class="main">
+      <p>PJM's grid serves 67 million people, and data centers are pushing up demand faster than new power plants can connect. Much of the new power will not arrive in time, and what does arrive counts for less than its size: a solar farm is credited with about 6% of its capacity at peak, a nuclear plant about 95%.</p>
+      <p>I simulated every plant waiting to join the grid 10,000 times, so the answer is a range of possible futures rather than one forecast. Then I built an app to show it.</p>
+    </div>
+    <dl class="note overview">
+      <dt>Timeline</dt><dd>Fall 2026, Longaeva AI Hack-a-Thon</dd>
+      <dt>My role</dt><dd>Data, modeling rules and design; directed Claude Code sessions</dd>
+      <dt>Team</dt><dd>Solo</dd>
+      <dt>Background</dt><dd>Data centers are pushing up demand on PJM's grid faster than new plants can connect.</dd>
+      <dt>Outcome</dt><dd>Reached the prototype stage. Public data only.</dd>
+    </dl>
+  </div>
+  <div class="grid">
+    <figure class="half-l"><h3>First version</h3><img src="assets/pjm-app-before.jpg" alt="The app before the redesign: a long technical headline, five specialist metrics and a dense paragraph above a distribution chart"><figcaption>I built it for specialists first: five metrics and a dense paragraph before the chart.</figcaption></figure>
+    <figure class="half-r"><h3>Redesign</h3><img src="assets/pjm-app-after.jpg" alt="The app after the redesign: one plain-language sentence, three headline numbers and a waterfall chart from the target to the shortfall"><figcaption>I put the answer first: one plain sentence and three numbers, then where the gap comes from.</figcaption></figure>
+  </div>
+</section>
+
+<section class="page">
+  <p class="label" id="pjm-process">Process</p>
+  <figure class="block"><img src="assets/annotated/annot-pjm-before.jpg" alt="The first version of the app, marked up by hand: the left controls ticked, the dense paragraph crossed out, the Deploy button underlined"><figcaption>The controls on the left worked. The paragraph did not: too much text. Analysts want the data so they can reach their own conclusions. The Deploy button had no job on this screen.</figcaption></figure>
+  <blockquote class="pull block">
+    <p class="big">"Who is the user?"</p>
+    <p class="rest">"How do people display simulation?"<br>"They should have movement?"</p>
+  </blockquote>
+  <div class="grid block">
+    <div class="half-l"><p>I renamed the project so anyone could understand the question from the title alone. The redesign is for analysts who are not grid specialists, and the detailed analysis is still there in tabs underneath.</p></div>
+    <figure class="half-r sketch"><img src="assets/sketch-pjm-clean.jpg" alt="Notebook sketch of the dashboard: a sidebar of metrics with a slider and selector, an overview line chart, and monthly and annual charts"><figcaption></figcaption></figure>
+  </div>
+  <figure class="only-web block"><video src="assets/pjm-clip-a.mp4" poster="assets/pjm-clip-a-poster.jpg" autoplay muted loop playsinline aria-label="Screen recording: switching the price cap off moves the auction price from $337.83 to $594.48 while supply stays the same"></video><figcaption>I made the price cap a switch so readers can test it themselves. Supply stays the same and the price nearly doubles.</figcaption></figure>
+</section>
+
+<section class="page">
+  <p class="label" id="pjm-building">Building it</p>
+  <div class="grid block">
+    <div class="main">
+      <p>I worked alone, directing several Claude Code sessions. They wrote the code. I sourced the data, set the rules, and approved every change to the model before it went in. Every assumption is labeled as published, measured or chosen, so a reader can see which numbers are facts and which are my choices.</p>
+      <ul class="bullets">
+        <li>A read-only audit found that the "reform works" scenario counted the same effect twice. It was removed, and a second audit confirmed the fix.</li>
+        <li>I backtested the model from 2019 onward. Actual supply landed inside the predicted range near its low end, which suggests the 2030 shortfall may be understated.</li>
+        <li>Claude Code said Vistra's filing never mentions Meta, and I disagreed. Meta was on page 54, but its text extraction had missed it.</li>
+      </ul>
+    </div>
+    <div class="note" id="pjm-outcome">
+      <p class="label">Outcome</p>
+      <p style="color:var(--ink)">In none of the 10,000 runs do new plants close the 2030/31 gap.</p>
+    </div>
+  </div>
+  <div class="voice block" id="pjm-took">
+    <p class="label">What I took from it</p>
+    <p class="headline">Let people reach their own conclusions</p>
+    <p>The model produced far more data than anyone could read, so the real design work was deciding what an analyst should see first. I thought through their day: which factors decide whether a project goes live, how prices and demand are moving, and where data centers are being built.</p>
+    <p>My first version told analysts what to conclude, in a dense paragraph. I realized they did not want my conclusion; they wanted the data and a way to test their own. The redesign replaced static charts with sliders, so an analyst can change an assumption and watch the answer move without touching the code.</p>
+  </div>
+  <div class="voice" id="pjm-next">
+    <p class="label">What I would change next</p>
+    <p>With more time, I would rework the navigation. The assumptions sidebar stays visible on every chart, which worked well, but with ten metrics it becomes hard to know where to change what; separate cards or views may serve analysts better than one long page. Before choosing, I would sit with an analyst. I never had that chance during the hackathon, and that conversation is what would tell me which idea is right.</p>
+  </div>
+</section>
+
+<!-- FACE VALUE -->
+<section class="page" id="face-value">
+  <h2 class="title">Face Value</h2>
+  <nav class="sections"><a href="#fv-overview">Overview</a><a href="#fv-process">Process</a><a href="#fv-outcome">Outcome</a><a href="#fv-took">What I took from it</a><a href="#fv-next">What I would change next</a></nav>
+  <p class="question wide">How do you study a market whose prices are hidden?</p>
+  <div class="grid block" id="fv-overview">
+    <div class="main">
+      <p>I was waiting for a resale concert ticket to drop in price. It went up instead: fewer than a hundred listings were left, and prices climb when supply is thin. I wanted to understand a market where the seller's stock is worth nothing the morning after.</p>
+    </div>
+    <dl class="note overview">
+      <dt>Timeline</dt><dd>May 2026 to now</dd>
+      <dt>My role</dt><dd>Research and engineering</dd>
+      <dt>Team</dt><dd>Solo</dd>
+      <dt>Background</dt><dd>A resale ticket that went up in price instead of down</dd>
+      <dt>Outcome</dt><dd>A research project. It is not deployed and has no users. Written in Python with a C++17 port in progress.</dd>
+    </dl>
+  </div>
+  <figure class="hero-chart"><img src="assets/annotated/annot-fv-spreads.jpg" alt="Bar chart of spread widening, simulated against measured Kalshi data, with the rising measured bars ticked by hand"><figcaption>The real market. Spreads widen as prices move; my simulation's stay flat.</figcaption></figure>
+</section>
+
+<section class="page">
+  <p class="label" id="fv-process">Process</p>
+  <div class="diary">
+    <div class="grid block"><p class="main">I built a ticket price collector, and the same day I learned that SeatGeek's public prices were closed. So I switched to prediction markets, which have the same shape: a hard expiry where every contract settles at zero or one, with free data I could check a simulation against. The contracts I used were about Rotten Tomatoes scores, Netflix rankings and Billboard debuts.</p><time class="note">30 July</time></div>
+    <div class="grid block"><p class="main">I mapped the order book's edge cases on paper before writing any code. I thought a buy at 100¢ against a sell at 95¢ would fill at 100¢. It fills at 95¢, because the order already waiting sets the price.</p><time class="note">31 July</time></div>
+  </div>
+  <figure class="sketch block"><img src="assets/sketch-face-value-clean.jpg" class="fv-sketch" alt="Notebook flowchart: ticket question to ticket price data, crossed out as not available, then to the Kalshi market, collected daily, and a simulated market with noise and a market maker, meeting at is matched and what was cleared"><figcaption></figcaption></figure>
+  <div class="diary">
+    <div class="grid block"><p class="main">I recorded 478 real contracts every 30 seconds for six days, through 165 resolutions.</p><time class="note">31 July – 6 August</time></div>
+    <div class="grid block"><p class="main">I compared the simulation with the recorded market: a world where I can see everything against one where I can only see prices from the outside.</p><time class="note">6 August</time></div>
+  </div>
+  <div class="diary">
+    <div class="grid block"><p class="main">I found an error in the reference price that had flipped the measured effect. One random seed showed a 12× improvement, which turned out to be luck once I ran 50.</p><time class="note">Mid August</time></div>
+    <div class="grid block"><p class="main">I started the C++17 port.</p><time class="note">21 September</time></div>
+  </div>
+</section>
+
+<section class="page">
+  <p class="label" id="fv-outcome">Outcome</p>
+  <div class="grid block">
+    <div class="main"><p>85% of a naive market maker's loss comes from the spread, not from the stock it holds. In the real data, spreads widen 21 times over when news arrives.</p></div>
+  </div>
+  <div class="voice block" id="fv-took">
+    <p class="label">What I took from it</p>
+    <p class="headline">The data can reshape the question</p>
+    <p>Face Value taught me that a technology idea has layers. The first is the need: I love concerts, and I felt that buyers were not seeing honest ticket prices. The second is the data, and that is where the project hit a wall, because ticket sellers keep their prices hidden so competitors cannot match them.</p>
+    <p>That secrecy closely resembled how financial markets behave, and competing in IMC Prosperity had already drawn me to how markets set prices. Rather than force the original question, I let it evolve into one I could test with real, live prices: prediction markets, where every price is public and every contract settles at zero or one.</p>
+  </div>
+  <div class="voice" id="fv-next">
+    <p class="label">What I would change next</p>
+    <p>Next, I would make my simulated market maker widen its spread when prices move, as real ones do, and record more markets, so that six days of data is not the whole story.</p>
+  </div>
+  <div class="close">
+    <p class="thanks">Thank you for reading.</p>
+    <p><a href="mailto:varshaa0801@gmail.com">varshaa0801@gmail.com</a><a href="https://www.linkedin.com/in/varshaasj/">LinkedIn</a></p>
+  </div>
+</section>
+
+</body>
+</html>
